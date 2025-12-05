@@ -195,7 +195,7 @@ export const appRouter = router({
         message: z.string().min(1, "Message is required"),
       }))
       .mutation(async ({ input }) => {
-        const adminEmail = "contact.scalebreakers@gmail.com";
+        const adminEmail = process.env.ADMIN_EMAIL || "dan.kae@outlook.com";
         const html = getContactFormEmailTemplate(input.name, input.email, input.message);
         const success = await sendEmail({
           to: adminEmail,
@@ -217,7 +217,7 @@ export const appRouter = router({
         details: z.string().min(1, "Details are required"),
       }))
       .mutation(async ({ input }) => {
-        const adminEmail = "contact.scalebreakers@gmail.com";
+        const adminEmail = process.env.ADMIN_EMAIL || "dan.kae@outlook.com";
         const html = getServiceEnquiryEmailTemplate(
           input.name,
           input.email,

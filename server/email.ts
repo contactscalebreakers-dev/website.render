@@ -1,10 +1,12 @@
 import nodemailer from "nodemailer";
 
-// Create transporter using Gmail SMTP
+// Create transporter using Outlook SMTP
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp-mail.outlook.com",
+  port: 587,
+  secure: false, // use TLS
   auth: {
-    user: process.env.EMAIL_USER || "contact.scalebreakers@gmail.com",
+    user: process.env.EMAIL_USER || "dan.kae@outlook.com",
     pass: process.env.EMAIL_PASSWORD || "",
   },
 });
@@ -24,7 +26,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     }
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER || "contact.scalebreakers@gmail.com",
+      from: `Scale Breakers <${process.env.EMAIL_USER || "dan.kae@outlook.com"}>`,
       to: options.to,
       subject: options.subject,
       html: options.html,

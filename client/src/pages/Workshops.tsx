@@ -8,7 +8,7 @@ import WorkshopBookingModal from "@/components/WorkshopBookingModal";
 
 export default function Workshops() {
   const [activeTab, setActiveTab] = useState<"public" | "ndis">("public");
-  const [selectedWorkshop, setSelectedWorkshop] = useState<{ title: string; price: number } | null>(null);
+  const [selectedWorkshop, setSelectedWorkshop] = useState<{ id: string; title: string; price: number } | null>(null);
 
   const { data: workshops, isLoading } = trpc.workshops.list.useQuery();
 
@@ -83,7 +83,7 @@ export default function Workshops() {
                         </div>
                         <Button
                           size="sm"
-                          onClick={() => setSelectedWorkshop({ title: workshop.title, price: parseInt(workshop.price as string) || 20 })}
+                          onClick={() => setSelectedWorkshop({ id: workshop.id, title: workshop.title, price: parseInt(workshop.price as string) || 20 })}
                         >
                           Book / Enquire
                         </Button>
@@ -252,6 +252,7 @@ export default function Workshops() {
         <WorkshopBookingModal
           isOpen={!!selectedWorkshop}
           onClose={() => setSelectedWorkshop(null)}
+          workshopId={selectedWorkshop.id}
           workshopTitle={selectedWorkshop.title}
           workshopPrice={selectedWorkshop.price}
         />

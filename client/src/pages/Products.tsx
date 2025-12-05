@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { ShoppingCart, Loader, Filter } from "lucide-react";
 import GlitchTitle from "@/components/GlitchTitle";
+import { useToast } from "@/hooks/use-toast";
 
 const CATEGORIES = [
   { id: "all", label: "All Products" },
@@ -17,6 +18,29 @@ export default function Products() {
   const { data: products, isLoading } = trpc.products.list.useQuery({
     category: selectedCategory === "all" ? undefined : selectedCategory,
   });
+  const { toast } = useToast();
+
+  const checkoutMutation = trpc.payments.createProductCheckout.useMutation({
+    onSuccess: (data) => {
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Checkout Failed",
+        description: error.message || "Failed to start checkout. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleBuyNow = (productId: string) => {
+    checkoutMutation.mutate({
+      productId,
+      quantity: 1,
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -116,10 +140,15 @@ export default function Products() {
 
                           <Button 
                             className="w-full flex items-center justify-center gap-2"
-                            disabled={!product.stock || parseInt(product.stock) === 0}
+                            disabled={!product.stock || parseInt(product.stock) === 0 || checkoutMutation.isPending}
+                            onClick={() => handleBuyNow(product.id)}
                           >
                             <ShoppingCart className="w-4 h-4" />
-                            {product.stock && parseInt(product.stock) > 0 ? "Add to Cart" : "Out of Stock"}
+                            {checkoutMutation.isPending 
+                              ? "Processing..." 
+                              : product.stock && parseInt(product.stock) > 0 
+                                ? "Buy Now - Stripe" 
+                                : "Out of Stock"}
                           </Button>
                         </div>
                       </div>
