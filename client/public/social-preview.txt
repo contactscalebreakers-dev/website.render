@@ -1,0 +1,22 @@
+SOCIAL PREVIEW IMAGE PLACEHOLDER
+
+This file is a placeholder for your social preview image.
+
+REQUIREMENTS:
+- Dimensions: 1200x630 pixels (optimal for Facebook/Twitter)
+- Format: JPG or PNG
+- File size: < 5MB
+- Content: Should show your brand, designer toys, or mural work
+
+TO REPLACE:
+1. Create or design your 1200x630px image
+2. Save it as "social-preview.jpg"
+3. Replace this file in client/public/
+4. Recommended: Include your logo and tagline
+   "Scale Breakers — Designer Toys & Murals"
+
+TOOLS TO CREATE:
+- Canva (free templates for social media images)
+- Figma (design from scratch)
+- Photoshop/GIMP (photo editing)
+- Screenshot of your best work + text overlay
