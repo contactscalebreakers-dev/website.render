@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../../.manus"
+		},
+		{
+			"path": "../../client"
+		},
+		{
+			"path": "../../drizzle"
+		},
+		{
+			"path": "../../node_modules"
+		},
+		{
+			"path": "../../patches"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../shared"
+		}
+	]
+}
