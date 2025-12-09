@@ -1,0 +1,9 @@
+{
+  "query": "DELETE FROM workshops WHERE id NOT IN (SELECT MIN(id) FROM workshops GROUP BY title);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4HskqtrmHBirxbq.root --database E83x3odVn6hMmUCFfhYife --execute DELETE FROM workshops WHERE id NOT IN (SELECT MIN(id) FROM workshops GROUP BY title);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1669
+}

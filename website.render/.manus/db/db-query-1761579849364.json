@@ -1,0 +1,70 @@
+{
+  "query": "SELECT id, title, price FROM workshops ORDER BY title;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 4HskqtrmHBirxbq.root --database E83x3odVn6hMmUCFfhYife --execute SELECT id, title, price FROM workshops ORDER BY title;",
+  "rows": [
+    {
+      "id": "4c724b70-83b3-472c-8431-2cfaf67aec3f",
+      "title": "Board Restoration",
+      "price": "20"
+    },
+    {
+      "id": "9edd12fd-f566-4c00-91a2-c6c2ab2da5ad",
+      "title": "Board Restoration",
+      "price": "42"
+    },
+    {
+      "id": "9abd1119-b529-4c32-b01b-8071513a41f5",
+      "title": "Custom Tumbler Lab",
+      "price": "30"
+    },
+    {
+      "id": "9ac24056-2e25-4075-a787-261a273b61c8",
+      "title": "Custom Tumbler Lab",
+      "price": "20"
+    },
+    {
+      "id": "1570646d-c847-4253-ba23-646884b7d117",
+      "title": "Mini Letterbox",
+      "price": "38"
+    },
+    {
+      "id": "8312c904-6087-42d5-bfcd-a0589e15c305",
+      "title": "Mini Letterbox",
+      "price": "20"
+    },
+    {
+      "id": "9a5a58f2-8f95-44d4-8b25-d38ceb341116",
+      "title": "Street Diorama",
+      "price": "20"
+    },
+    {
+      "id": "ec153f91-fc85-4f26-9fbc-a8643cd52dd0",
+      "title": "Street Diorama",
+      "price": "32"
+    },
+    {
+      "id": "0adaa1ae-9c6e-4ae9-ba93-c0ad04e51d11",
+      "title": "Street Tote Custom",
+      "price": "20"
+    },
+    {
+      "id": "8e045c0b-3c5e-42ef-a733-56eff60d84c9",
+      "title": "Street Tote Custom",
+      "price": "28"
+    },
+    {
+      "id": "5ba5f020-bfd3-4f18-aa2d-f241481e54f8",
+      "title": "Urban Wind Chimes",
+      "price": "20"
+    },
+    {
+      "id": "9c0f968a-4221-4776-b4fe-d213a525198a",
+      "title": "Urban Wind Chimes",
+      "price": "35"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tprice\n4c724b70-83b3-472c-8431-2cfaf67aec3f\tBoard Restoration\t20\n9edd12fd-f566-4c00-91a2-c6c2ab2da5ad\tBoard Restoration\t42\n9abd1119-b529-4c32-b01b-8071513a41f5\tCustom Tumbler Lab\t30\n9ac24056-2e25-4075-a787-261a273b61c8\tCustom Tumbler Lab\t20\n1570646d-c847-4253-ba23-646884b7d117\tMini Letterbox\t38\n8312c904-6087-42d5-bfcd-a0589e15c305\tMini Letterbox\t20\n9a5a58f2-8f95-44d4-8b25-d38ceb341116\tStreet Diorama\t20\nec153f91-fc85-4f26-9fbc-a8643cd52dd0\tStreet Diorama\t32\n0adaa1ae-9c6e-4ae9-ba93-c0ad04e51d11\tStreet Tote Custom\t20\n8e045c0b-3c5e-42ef-a733-56eff60d84c9\tStreet Tote Custom\t28\n5ba5f020-bfd3-4f18-aa2d-f241481e54f8\tUrban Wind Chimes\t20\n9c0f968a-4221-4776-b4fe-d213a525198a\tUrban Wind Chimes\t35\n",
+  "stderr": "",
+  "execution_time_ms": 1774
+}
