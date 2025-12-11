@@ -21,11 +21,11 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b-2 border-gray-900 shadow-lg">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header role="banner" className="sticky top-0 z-50 bg-white border-b-2 border-gray-900 shadow-lg">
+      <nav aria-label="Main navigation" className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-          <img src="/logo-main.png" alt="Scale Breakers" className="h-12 w-auto hover:scale-105 transition" />
+          <img src="/logo-main.png" alt="Scale Breakers - Home" className="h-12 w-auto hover:scale-105 transition" />
         </Link>
 
         {/* Desktop Navigation */}
