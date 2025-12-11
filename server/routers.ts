@@ -59,6 +59,53 @@ export const appRouter = router({
       .query(async ({ input }) => {
         return await getProducts(input?.category);
       }),
+
+    // One-time seed endpoint - adds placeholder products
+    seedProducts: publicProcedure.mutation(async () => {
+      const existingProducts = await getProducts();
+      if (existingProducts && existingProducts.length > 0) {
+        return { success: false, message: "Products already exist", count: existingProducts.length };
+      }
+
+      const placeholderProducts = [
+        {
+          id: crypto.randomUUID(),
+          name: "Custom 3D Character Model",
+          description: "Personalized 3D character design and modeling. Perfect for gaming, animation, or 3D printing. Includes base mesh, textures, and source files.",
+          category: "3d-model" as const,
+          price: 350,
+          stock: 5,
+          imageUrl: "/portfolio-character.png",
+          isOneOfOne: false,
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Original Canvas Painting - Urban Vibes",
+          description: "Hand-painted original artwork on canvas. 60x80cm. One of a kind piece featuring Brisbane street art inspired design.",
+          category: "canvas" as const,
+          price: 450,
+          stock: 1,
+          imageUrl: "/portfolio-canvas.jpg",
+          isOneOfOne: true,
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "Mini Diorama - Street Scene",
+          description: "Detailed miniature street scene diorama. Hand-crafted with mixed media. Approximately 20x15cm base.",
+          category: "diorama" as const,
+          price: 280,
+          stock: 3,
+          imageUrl: "/portfolio-street-art.jpg",
+          isOneOfOne: false,
+        },
+      ];
+
+      for (const product of placeholderProducts) {
+        await createProduct(product);
+      }
+
+      return { success: true, message: "Added 3 placeholder products!", count: 3 };
+    }),
     
     getById: publicProcedure
       .input(z.object({ id: z.string() }))
