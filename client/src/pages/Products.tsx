@@ -16,10 +16,24 @@ const CATEGORIES = [
 
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const { data: products, isLoading } = trpc.products.list.useQuery({
+  const { data: products, isLoading, refetch } = trpc.products.list.useQuery({
     category: selectedCategory === "all" ? undefined : selectedCategory,
   });
   const { toast } = useToast();
+
+  const seedMutation = trpc.products.seedProducts.useMutation({
+    onSuccess: (data) => {
+      if (data.success) {
+        toast({ title: "Products Added!", description: data.message });
+        refetch();
+      } else {
+        toast({ title: "Info", description: data.message });
+      }
+    },
+    onError: (error) => {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    },
+  });
 
   const checkoutMutation = trpc.payments.createProductCheckout.useMutation({
     onSuccess: (data) => {
@@ -159,7 +173,14 @@ export default function Products() {
               ) : (
                 <div className="text-center py-12">
                   <p className="text-gray-600 mb-4">No products in this category.</p>
-                  <p className="text-gray-500">Check back soon for new items!</p>
+                  <p className="text-gray-500 mb-6">Check back soon for new items!</p>
+                  <Button 
+                    onClick={() => seedMutation.mutate()}
+                    disabled={seedMutation.isPending}
+                    variant="outline"
+                  >
+                    {seedMutation.isPending ? "Adding..." : "Add Sample Products"}
+                  </Button>
                 </div>
               )}
             </div>
