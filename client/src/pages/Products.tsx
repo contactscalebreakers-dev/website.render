@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
-import { ShoppingCart, Loader, Filter } from "lucide-react";
+import { ShoppingCart, Loader, Filter, Plus } from "lucide-react";
 import GlitchTitle from "@/components/GlitchTitle";
-import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 const CATEGORIES = [
   { id: "all", label: "All Products" },
@@ -19,28 +20,16 @@ export default function Products() {
   const { data: products, isLoading } = trpc.products.list.useQuery({
     category: selectedCategory === "all" ? undefined : selectedCategory,
   });
-  const { toast } = useToast();
+  const { addItem } = useCart();
 
-  const checkoutMutation = trpc.payments.createProductCheckout.useMutation({
-    onSuccess: (data) => {
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    },
-    onError: (error) => {
-      toast({
-        title: "Checkout Failed",
-        description: error.message || "Failed to start checkout. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleBuyNow = (productId: string) => {
-    checkoutMutation.mutate({
-      productId,
-      quantity: 1,
+  const handleAddToCart = (product: { id: string; name: string; price: string; imageUrl?: string | null }) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: parseFloat(product.price),
+      imageUrl: product.imageUrl || undefined,
     });
+    toast.success(`${product.name} added to cart!`);
   };
 
   return (
@@ -140,16 +129,14 @@ export default function Products() {
                           </div>
 
                           <Button 
-                            className="w-full flex items-center justify-center gap-2"
-                            disabled={!product.stock || parseInt(product.stock) === 0 || checkoutMutation.isPending}
-                            onClick={() => handleBuyNow(product.id)}
+                            className="w-full flex items-center justify-center gap-2 min-h-[44px] bg-green-600 hover:bg-green-700"
+                            disabled={!product.stock || parseInt(product.stock) === 0}
+                            onClick={() => handleAddToCart(product)}
                           >
-                            <ShoppingCart className="w-4 h-4" />
-                            {checkoutMutation.isPending 
-                              ? "Processing..." 
-                              : product.stock && parseInt(product.stock) > 0 
-                                ? "Buy Now - Stripe" 
-                                : "Out of Stock"}
+                            <Plus className="w-4 h-4" aria-hidden="true" />
+                            {product.stock && parseInt(product.stock) > 0 
+                              ? `Add to Cart - $${product.price}` 
+                              : "Out of Stock"}
                           </Button>
                         </div>
                       </div>

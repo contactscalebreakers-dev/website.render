@@ -2,37 +2,37 @@ import { Link } from "wouter";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12 mt-16">
+    <footer role="contentinfo" className="bg-gray-900 text-white py-12 mt-16">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h4 className="font-bold text-lg mb-4">Scale Breakers</h4>
+            <h2 className="font-bold text-lg mb-4">Scale Breakers</h2>
             <p className="text-gray-400 text-sm">ABN 12 345 678 901</p>
             <p className="text-gray-400 text-sm mt-2">Break the mold. Make art.</p>
           </div>
-          <div>
-            <h4 className="font-bold mb-4">Explore</h4>
+          <nav aria-label="Explore links">
+            <h2 className="font-bold mb-4">Explore</h2>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/workshops"><span className="hover:text-white transition">Workshops</span></Link></li>
-              <li><Link href="/products"><span className="hover:text-white transition">Shop</span></Link></li>
-              <li><Link href="/portfolio"><span className="hover:text-white transition">Portfolio</span></Link></li>
-              <li><Link href="/services"><span className="hover:text-white transition">Services</span></Link></li>
+              <li><Link href="/workshops" className="hover:text-white transition inline-block py-1">Workshops</Link></li>
+              <li><Link href="/products" className="hover:text-white transition inline-block py-1">Shop</Link></li>
+              <li><Link href="/portfolio" className="hover:text-white transition inline-block py-1">Portfolio</Link></li>
+              <li><Link href="/services" className="hover:text-white transition inline-block py-1">Services</Link></li>
             </ul>
-          </div>
-          <div>
-            <h4 className="font-bold mb-4">Services</h4>
+          </nav>
+          <nav aria-label="Services links">
+            <h2 className="font-bold mb-4">Services</h2>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><Link href="/services/murals"><span className="hover:text-white transition">Mural Commissions</span></Link></li>
-              <li><Link href="/services/3d-scanning"><span className="hover:text-white transition">3D Scanning</span></Link></li>
-              <li><Link href="/services/3d-modelling"><span className="hover:text-white transition">3D Modelling</span></Link></li>
+              <li><Link href="/services/murals" className="hover:text-white transition inline-block py-1">Mural Commissions</Link></li>
+              <li><Link href="/services/3d-scanning" className="hover:text-white transition inline-block py-1">3D Scanning</Link></li>
+              <li><Link href="/services/3d-modelling" className="hover:text-white transition inline-block py-1">3D Modelling</Link></li>
             </ul>
-          </div>
+          </nav>
           <div>
-            <h4 className="font-bold mb-4">Connect</h4>
+            <h2 className="font-bold mb-4">Connect</h2>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="https://instagram.com/scale.breakers" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a></li>
-              <li><a href="https://www.facebook.com/TheScaleBreakers/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Facebook</a></li>
-              <li><a href="mailto:contact.scalebreakers@gmail.com" className="hover:text-white transition">Email</a></li>
+              <li><a href="https://instagram.com/scale.breakers" target="_blank" rel="noopener noreferrer" className="hover:text-white transition inline-block py-1" aria-label="Follow us on Instagram">Instagram</a></li>
+              <li><a href="https://www.facebook.com/TheScaleBreakers/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition inline-block py-1" aria-label="Follow us on Facebook">Facebook</a></li>
+              <li><a href="mailto:contact.scalebreakers@gmail.com" className="hover:text-white transition inline-block py-1" aria-label="Email us">Email</a></li>
             </ul>
           </div>
         </div>
