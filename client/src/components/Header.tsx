@@ -1,10 +1,12 @@
 import { Link } from "wouter";
-import { Menu, X, Instagram, Facebook, Mail, ChevronDown } from "lucide-react";
+import { Menu, X, Instagram, Facebook, Mail, ChevronDown, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "@/contexts/CartContext";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const { itemCount, openCart } = useCart();
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -21,11 +23,11 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b-2 border-gray-900 shadow-lg">
-      <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+    <header role="banner" className="sticky top-0 z-50 bg-white border-b-2 border-gray-900 shadow-lg">
+      <nav aria-label="Main navigation" className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-          <img src="/logo-main.png" alt="Scale Breakers" className="h-12 w-auto hover:scale-105 transition" />
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0" aria-label="Scale Breakers - Home">
+          <img src="/logo-main.png" alt="Scale Breakers logo" className="h-12 w-auto hover:scale-105 transition" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -124,15 +126,45 @@ export default function Header() {
           >
             <Mail className="w-5 h-5" />
           </a>
+
+          {/* Cart Button */}
+          <button
+            onClick={openCart}
+            className="relative p-2 hover:bg-gray-100 rounded-lg transition min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label={`Shopping cart with ${itemCount} items`}
+          >
+            <ShoppingCart className="w-5 h-5 text-gray-700" />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {itemCount}
+              </span>
+            )}
+          </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Cart + Menu Button */}
+        <div className="lg:hidden flex items-center gap-2">
+          <button
+            onClick={openCart}
+            className="relative p-2 hover:bg-gray-100 rounded-lg transition min-w-[44px] min-h-[44px] flex items-center justify-center"
+            aria-label={`Shopping cart with ${itemCount} items`}
+          >
+            <ShoppingCart className="w-5 h-5 text-gray-700" />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {itemCount}
+              </span>
+            )}
+          </button>
         <button
-          className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition min-w-[44px] min-h-[44px]"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Navigation */}

@@ -375,6 +375,56 @@ export const appRouter = router({
           throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create checkout session" });
         }
       }),
+
+    createCartCheckout: publicProcedure
+      .input(z.object({
+        items: z.array(z.object({
+          productId: z.string(),
+          quantity: z.number().int().positive(),
+        })),
+      }))
+      .mutation(async ({ ctx, input }) => {
+        try {
+          const origin = ctx.req.headers.origin || "https://scalebreakers.space";
+          
+          // Get all products and build line items
+          const lineItems = await Promise.all(
+            input.items.map(async (item) => {
+              const product = await getProductById(item.productId);
+              if (!product) {
+                throw new TRPCError({ code: "NOT_FOUND", message: `Product ${item.productId} not found` });
+              }
+              return {
+                name: product.name,
+                amount: parseInt(product.price) * 100, // Convert to cents
+                quantity: item.quantity,
+              };
+            })
+          );
+
+          const session = await createCheckoutSession({
+            userId: ctx.user?.id || "guest",
+            userEmail: ctx.user?.email || "",
+            userName: ctx.user?.name || "Guest",
+            items: lineItems,
+            successUrl: `${origin}/products?payment=success`,
+            cancelUrl: `${origin}/products?payment=cancelled`,
+            metadata: {
+              type: "cart",
+              item_count: input.items.length.toString(),
+            },
+          });
+
+          if (!session.url) {
+            throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create checkout session" });
+          }
+
+          return { url: session.url };
+        } catch (error) {
+          console.error("Failed to create cart checkout:", error);
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create checkout session" });
+        }
+      }),
   }),
 
   admin: router({
