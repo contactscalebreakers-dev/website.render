@@ -1,5 +1,11 @@
 import "dotenv/config";
-import "dotenv/config"; import { drizzle } from "drizzle-orm/postgres-js"; import { postgres } from "postgres"; import { portfolioItems, products, workshops } from "./drizzle/schema"; import crypto from "crypto"; const client = postgres(process.env.DATABASE_URL!); const db = drizzle(client);
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import { portfolioItems, products, workshops } from "./drizzle/schema.ts";
+import crypto from "crypto";
+const client = postgres(process.env.DATABASE_URL!);
+const db = drizzle(client);
 
 async function seed() {
   console.log("🌱 Seeding portfolio items...");
@@ -100,33 +106,53 @@ async function seed() {
     // 3D Models
     {
       id: crypto.randomUUID(),
-      name: "Urban Character Design - 3D Model File",
-      description: "High-quality 3D model file of our signature urban character design. Perfect for digital artists, animators, and 3D enthusiasts. Includes multiple formats (OBJ, FBX, BLEND). One-of-one digital asset.",
+      name: "DIGITS 3D Model 1",
+      description: "Exclusive 3D model from the DIGITS series. High-quality, ready for animation or print.",
       category: "3d-model",
-      price: "85.00",
-      imageUrl: "/portfolio-character.png",
+      price: "120.00",
+      imageUrl: "/37E782DA-13FD-490C-8E0F-AEB263409F41.png",
       isOneOfOne: "true",
       stock: "1",
     },
     {
       id: crypto.randomUUID(),
-      name: "Spray Paint Bottle Character - 3D Model",
-      description: "Detailed 3D model of our personified spray paint bottle character. Ready for animation, rendering, or integration into digital projects. Includes textures and materials.",
+      name: "DIGITS 3D Model 2",
+      description: "Exclusive 3D model from the DIGITS series. High-quality, ready for animation or print.",
       category: "3d-model",
-      price: "95.00",
-      imageUrl: "/portfolio-character.png",
+      price: "120.00",
+      imageUrl: "/2D9C5356-327D-4C02-9F7F-FF36B0CF6EBE.png",
       isOneOfOne: "true",
       stock: "1",
     },
     {
       id: crypto.randomUUID(),
-      name: "Urban Street Scene - 3D Model Pack",
-      description: "Complete 3D model pack featuring urban street elements and character designs. Perfect for game developers, animators, and digital artists. Includes 5 unique models.",
+      name: "DIGITS 3D Model 3",
+      description: "Exclusive 3D model from the DIGITS series. High-quality, ready for animation or print.",
       category: "3d-model",
-      price: "150.00",
-      imageUrl: "/portfolio-character.png",
-      isOneOfOne: "false",
-      stock: "3",
+      price: "120.00",
+      imageUrl: "/2A477A49-E5BB-4499-A3AA-BBB70DC10570.png",
+      isOneOfOne: "true",
+      stock: "1",
+    },
+    {
+      id: crypto.randomUUID(),
+      name: "DIGITS 3D Model 4",
+      description: "Exclusive 3D model from the DIGITS series. High-quality, ready for animation or print.",
+      category: "3d-model",
+      price: "120.00",
+      imageUrl: "/26F96CF3-1CF6-4F16-B6BB-809A8BC2354D.png",
+      isOneOfOne: "true",
+      stock: "1",
+    },
+    {
+      id: crypto.randomUUID(),
+      name: "DIGITS 3D Model 5",
+      description: "Exclusive 3D model from the DIGITS series. High-quality, ready for animation or print.",
+      category: "3d-model",
+      price: "120.00",
+      imageUrl: "/3C8463B9-619D-42F8-99BA-E41927194E7C.png",
+      isOneOfOne: "true",
+      stock: "1",
     },
 
     // Dioramas

@@ -8,10 +8,11 @@ import { useToast } from "@/hooks/use-toast";
 
 const CATEGORIES = [
   { id: "all", label: "All Products" },
-  { id: "featured", label: "Featured Pieces" },
-  { id: "figurines", label: "Collectible Figurines" },
-  { id: "diorama", label: "Urban Dioramas" },
-  { id: "artwork", label: "Original Artwork" },
+  { id: "3d-model", label: "3D Models" },
+  { id: "canvas", label: "Canvas Art" },
+  { id: "diorama", label: "Dioramas" },
+  { id: "workshop", label: "Workshops" },
+  { id: "other", label: "Other" },
 ];
 
 export default function Products() {

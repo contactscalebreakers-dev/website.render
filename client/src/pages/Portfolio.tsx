@@ -29,8 +29,17 @@ export default function Portfolio() {
             </p>
 
             {/* Temporarily hidden until real images are available */}
-            <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-12 text-center mb-8">
-              <p className="text-gray-500 text-lg">Mural images coming soon</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              <div className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
+                <img src="/A3AFCEA8-BDBA-475A-B647-13CAD3DA9DA7.png" alt="Mural 1" className="w-full h-64 object-cover" />
+              </div>
+              <div className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
+                <img src="/8A98DE36-8DC3-45DC-BA7C-2AA7AD1A8DB1.png" alt="Mural 2" className="w-full h-64 object-cover" />
+              </div>
+              <div className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
+                <img src="/85156682-8690-47FD-AEEB-3434D3146FC0.png" alt="Mural 3" className="w-full h-64 object-cover" />
+              </div>
             </div>
 
             <div className="space-y-3 text-gray-700">

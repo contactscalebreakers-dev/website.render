@@ -168,7 +168,7 @@ export default function Workshops() {
                   <ul className="space-y-2 text-gray-700">
                     <li>✓ Working With Children Check (WWCC)</li>
                     <li>✓ Police Check</li>
-                    <li>✓ ABN: 12 345 678 901</li>
+                    <li>✓ ABN: See downloadable PDF for official details</li>
                     <li>✓ Accessibility best practices and training</li>
                   </ul>
                 </div>
@@ -216,7 +216,7 @@ export default function Workshops() {
                     >
                       <Download className="w-5 h-5 text-blue-600" />
                       <div>
-                        <p className="font-semibold text-sm">ABN Details</p>
+                        <p className="font-semibold text-sm">ABN Details (Official)</p>
                         <p className="text-xs text-gray-500">PDF</p>
                       </div>
                     </a>
