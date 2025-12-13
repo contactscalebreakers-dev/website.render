@@ -312,7 +312,7 @@ export default function ServicesMurals() {
               height="360"
               className="rounded-lg shadow-lg w-full max-w-2xl"
             >
-              <source src="/fixed-video.mp4" type="video/mp4" />
+              <source src="/0FE664D0-7FE9-475E-A875-2596FC196451.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
