@@ -178,7 +178,7 @@ Budget: ${formData.budget}
           <form onSubmit={handleSubmit} className="space-y-6 bg-gray-50 p-8 rounded-lg border-2 border-gray-200">
             <div>
               <label className="block text-sm font-bold mb-2">What are you scanning? *</label>
-              <select 
+              <select title="Scanning Type"
                 name="scanning" 
                 value={formData.scanning}
                 onChange={handleInputChange}
@@ -195,7 +195,7 @@ Budget: ${formData.budget}
 
             <div>
               <label className="block text-sm font-bold mb-2">Intended use *</label>
-              <select 
+              <select title="Intended Use"
                 name="intendedUse" 
                 value={formData.intendedUse}
                 onChange={handleInputChange}
@@ -213,7 +213,7 @@ Budget: ${formData.budget}
 
             <div>
               <label className="block text-sm font-bold mb-2">Required file format *</label>
-              <select 
+              <select title="File Format"
                 name="fileFormat" 
                 value={formData.fileFormat}
                 onChange={handleInputChange}

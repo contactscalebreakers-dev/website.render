@@ -116,6 +116,7 @@ export default function Home() {
                 <iframe
                   src="https://www.youtube.com/embed/Fb95uqE8BVQ"
                   className="w-full h-full"
+                  title="Workshop Highlights Video"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>

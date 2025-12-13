@@ -216,7 +216,7 @@ Budget: ${formData.budget}
 
             <div>
               <label className="block text-sm font-bold mb-2">Style *</label>
-              <select 
+              <select title="Style"
                 name="style" 
                 value={formData.style}
                 onChange={handleInputChange}
@@ -234,7 +234,7 @@ Budget: ${formData.budget}
 
             <div>
               <label className="block text-sm font-bold mb-2">Complexity Level *</label>
-              <select 
+              <select title="Complexity Level"
                 name="complexity" 
                 value={formData.complexity}
                 onChange={handleInputChange}

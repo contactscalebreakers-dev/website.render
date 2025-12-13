@@ -152,6 +152,8 @@ export default function ServicesMurals() {
                 <label className="block text-sm font-semibold mb-2">Name *</label>
                 <input
                   type="text"
+                  title="Name"
+                  placeholder="Your name"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -162,6 +164,8 @@ export default function ServicesMurals() {
                 <label className="block text-sm font-semibold mb-2">Email *</label>
                 <input
                   type="email"
+                  title="Email"
+                  placeholder="Your email"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -175,6 +179,8 @@ export default function ServicesMurals() {
                 <label className="block text-sm font-semibold mb-2">Phone</label>
                 <input
                   type="tel"
+                  title="Phone"
+                  placeholder="Your phone number (optional)"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -184,6 +190,8 @@ export default function ServicesMurals() {
                 <label className="block text-sm font-semibold mb-2">Location/Suburb</label>
                 <input
                   type="text"
+                  title="Location"
+                  placeholder="Project location"
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -205,6 +213,7 @@ export default function ServicesMurals() {
               <div>
                 <label className="block text-sm font-semibold mb-2">Wall Condition</label>
                 <select
+                  title="Wall Size"
                   value={formData.wallCondition}
                   onChange={(e) => setFormData({ ...formData, wallCondition: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -244,6 +253,7 @@ export default function ServicesMurals() {
               <div>
                 <label className="block text-sm font-semibold mb-2">Timeline</label>
                 <select
+                  title="Wall Condition"
                   value={formData.timeline}
                   onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
@@ -258,6 +268,7 @@ export default function ServicesMurals() {
               <div>
                 <label className="block text-sm font-semibold mb-2">Budget Range</label>
                 <select
+                  title="Theme"
                   value={formData.budget}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"

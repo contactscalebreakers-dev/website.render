@@ -18,38 +18,7 @@ const CATEGORIES = [
   { id: "all", label: "All Products" },
   { id: "toys", label: "Designer Toys" },
   { id: "art", label: "Art & Prints" },
-  { id: "murals", label: "Mural Commissions" },
-];
-
-export default function Products() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { toast } = useToast();
-
-  useEffect(() => {
-    fetch('/data/products.json')
-import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { ShoppingCart, Loader, Filter } from "lucide-react";
-import GlitchTitle from "@/components/GlitchTitle";
-import { useToast } from "@/hooks/use-toast";
-
-interface Product {
-  id: string;
-  title: string;
-  image: string;
-  price: number;
-  description: string;
-  category: string;
-}
-
-const CATEGORIES = [
-  { id: "all", label: "All Products" },
-  { id: "toys", label: "Designer Toys" },
-  { id: "art", label: "Art & Prints" },
-  { id: "murals", label: "Mural Commissions" },
+  { id: "murals", label: "Urban Dioramas" },
 ];
 
 export default function Products() {

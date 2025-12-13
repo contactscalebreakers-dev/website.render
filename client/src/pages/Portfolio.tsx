@@ -30,6 +30,7 @@ export default function Portfolio() {
   const murals = portfolio.filter(item => item.category === "murals");
   const designs = portfolio.filter(item => item.category === "design");
   const toys = portfolio.filter(item => item.category === "toys");
+  const artworks = portfolio.filter(item => item.category === "artwork" || item.category === "original-artwork");
 
   return (
     <div className="min-h-screen bg-white">
@@ -132,6 +133,49 @@ export default function Portfolio() {
               <p><strong>Urban Dioramas</strong> — Miniature street scenes combining 3D models and hand-painted details</p>
               <p><strong>Digital Renders</strong> — Character design and experimental 3D work</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Artwork & Paintings */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4">Artwork & Paintings</h2>
+            <p className="text-gray-600 text-lg mb-12">
+              Original artwork, paintings, and sketchbook pieces.
+            </p>
+
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <Loader className="w-8 h-8 animate-spin text-gray-400" />
+              </div>
+            ) : artworks.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                {artworks.map((item) => (
+                  <div
+                    key={item.id}
+                    className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition"
+                  >
+                    <div className="relative overflow-hidden bg-gray-100 aspect-square">
+                      <img
+                        src={`/${item.image}`}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                      <p className="text-gray-600 text-sm">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white border-2 border-dashed border-gray-300 rounded-lg p-12 text-center mb-8">
+                <p className="text-gray-500 text-lg">Artwork images coming soon</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

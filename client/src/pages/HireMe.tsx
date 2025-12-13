@@ -1,3 +1,4 @@
+// This file is being deleted as it is unused.
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
@@ -247,6 +248,8 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
+                title="Name"
+                placeholder="Enter your name"
               />
             </div>
 
@@ -259,6 +262,8 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
+                title="Email"
+                placeholder="Enter your email address"
               />
             </div>
 
@@ -270,6 +275,8 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 value={formData.phone}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                title="Phone"
+                placeholder="Enter your phone number (optional)"
               />
             </div>
 
@@ -281,6 +288,8 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
+                title="Service Type"
+                aria-label="Service Type"
               >
                 <option value="mural">Mural Commission</option>
                 <option value="3d-scanning">3D Scanning</option>
@@ -299,6 +308,8 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 rows={4}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
+                title="Project Description"
+                placeholder="Describe your project"
               />
             </div>
 
@@ -311,6 +322,7 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 onChange={handleChange}
                 placeholder="e.g. $2000 - $5000"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                title="Budget"
               />
             </div>
 
@@ -323,6 +335,7 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 onChange={handleChange}
                 placeholder="e.g. 4-6 weeks"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                title="Timeline"
               />
             </div>
 
@@ -334,6 +347,8 @@ Additional Notes: ${formData.additionalNotes || "None"}
                 onChange={handleChange}
                 rows={3}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                title="Additional Notes"
+                placeholder="Any extra information (optional)"
               />
             </div>
 

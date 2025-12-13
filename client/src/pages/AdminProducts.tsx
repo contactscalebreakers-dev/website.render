@@ -138,6 +138,8 @@ export default function AdminProducts() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
+                    placeholder="Enter product name"
+                    title="Product Name"
                   />
                 </div>
 
@@ -147,6 +149,7 @@ export default function AdminProducts() {
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    title="Category"
                   >
                     <option value="workshop-ticket">Workshop Ticket</option>
                     <option value="3d-model">3D Model</option>
@@ -165,6 +168,8 @@ export default function AdminProducts() {
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
+                    placeholder="Enter price"
+                    title="Price"
                   />
                 </div>
 
@@ -176,6 +181,8 @@ export default function AdminProducts() {
                     onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
+                    placeholder="Enter stock quantity"
+                    title="Stock Quantity"
                   />
                 </div>
 
@@ -185,8 +192,9 @@ export default function AdminProducts() {
                     type="text"
                     value={formData.imageUrl}
                     onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                    placeholder="/portfolio-image.jpg"
+                    placeholder="/portfolio-image.webp"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    title="Image URL"
                   />
                 </div>
 
@@ -210,6 +218,8 @@ export default function AdminProducts() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
                   required
+                  placeholder="Enter product description"
+                  title="Description"
                 />
               </div>
 

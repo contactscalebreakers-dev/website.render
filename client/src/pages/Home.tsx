@@ -111,16 +111,17 @@ export default function Home() {
               Animorphic character design and hands-on creative workshops in action
             </p>
             
-            <div className="flex justify-center">
-              <div className="w-full max-w-md aspect-[9/16] bg-gray-100 rounded-lg overflow-hidden shadow-lg">
-                <iframe
-                  src="https://www.youtube.com/embed/Fb95uqE8BVQ"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+              <div className="flex justify-center">
+                <div className="w-full max-w-md aspect-[9/16] bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    src="https://www.youtube.com/embed/Fb95uqE8BVQ"
+                    title="Workshop Highlights Video"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
-            </div>
           </div>
         </div>
       </section>

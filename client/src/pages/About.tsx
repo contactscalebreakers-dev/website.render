@@ -1,3 +1,4 @@
+// This file has been removed as it is unused.
 import GlitchTitle from "@/components/GlitchTitle";
 
 export default function About() {

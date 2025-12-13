@@ -165,6 +165,7 @@ export default function AdminBookings() {
                       <td className="px-6 py-4">
                         <div className="flex gap-2">
                           <select
+                            aria-label="Change booking status"
                             value={booking.status || "pending"}
                             onChange={(e) => handleStatusChange(booking.id, e.target.value as any)}
                             className="px-2 py-1 text-xs border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"

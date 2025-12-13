@@ -156,6 +156,8 @@ export default function ServicesMurals() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  placeholder="Enter your name"
+                  title="Name"
                 />
               </div>
               <div>
@@ -166,6 +168,8 @@ export default function ServicesMurals() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  placeholder="Enter your email"
+                  title="Email"
                 />
               </div>
             </div>
@@ -178,6 +182,8 @@ export default function ServicesMurals() {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  placeholder="Enter your phone number"
+                  title="Phone"
                 />
               </div>
               <div>
@@ -187,6 +193,8 @@ export default function ServicesMurals() {
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  placeholder="Enter your location or suburb"
+                  title="Location/Suburb"
                 />
               </div>
             </div>
@@ -200,6 +208,7 @@ export default function ServicesMurals() {
                   value={formData.wallSize}
                   onChange={(e) => setFormData({ ...formData, wallSize: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  title="Wall Size"
                 />
               </div>
               <div>
@@ -208,6 +217,7 @@ export default function ServicesMurals() {
                   value={formData.wallCondition}
                   onChange={(e) => setFormData({ ...formData, wallCondition: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  title="Wall Condition"
                 >
                   <option value="">Select...</option>
                   <option value="new">New/Smooth</option>
@@ -247,6 +257,7 @@ export default function ServicesMurals() {
                   value={formData.timeline}
                   onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  title="Timeline"
                 >
                   <option value="">Select...</option>
                   <option value="urgent">Urgent (1-2 weeks)</option>
@@ -261,6 +272,7 @@ export default function ServicesMurals() {
                   value={formData.budget}
                   onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  title="Budget Range"
                 >
                   <option value="">Select...</option>
                   <option value="under-1000">Under $1,000</option>
@@ -292,6 +304,18 @@ export default function ServicesMurals() {
               {submitMuralRequest.isPending ? "Submitting..." : "Submit Request"}
             </Button>
           </form>
+          {/* Embedded Video at the bottom */}
+          <div className="mt-10 flex justify-center">
+            <video
+              controls
+              width="640"
+              height="360"
+              className="rounded-lg shadow-lg w-full max-w-2xl"
+            >
+              <source src="/fixed-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </section>
     </div>

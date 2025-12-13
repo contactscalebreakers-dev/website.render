@@ -2,7 +2,7 @@
   {
     "id": "1",
     "title": "Custom 3D Resin Toy",
-    "image": "1BA64303-CAD3-4DD9-BAAD-FBA1A60F45DC.webp",
+    "image": "IMG_1080.JPEG",
     "price": 45,
     "description": "Hand-painted designer toy, limited edition",
     "category": "toys"
@@ -10,9 +10,17 @@
   {
     "id": "2",
     "title": "Urban Art Print",
-    "image": "7C9A3532-6F8E-4F26-BA1D-A6D93AD87353.webp",
+    "image": "7C9A3532-F45F-4B61-A8D5-53D5878595D0.webp",
     "price": 25,
     "description": "High-quality print of original street art",
+    "category": "art"
+  },
+  {
+    "id": "3",
+    "title": "The Pyrex Panther",
+    "image": "IMG_1094.JPEG",
+    "price": 50,
+    "description": "High quality print of the Pyrex Panther artwork.",
     "category": "art"
   }
 ]

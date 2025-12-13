@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Menu, X, Instagram, Facebook, Mail, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import "./Header.css";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,28 +56,65 @@ export default function Header() {
           </Link>
 
           {/* Services Dropdown */}
-          <div 
+          <div
             className="relative group"
             onMouseEnter={() => setIsServicesOpen(true)}
             onMouseLeave={() => setIsServicesOpen(false)}
           >
-            <button className="text-sm font-bold tracking-wide uppercase text-gray-900 hover:text-blue-600 transition flex items-center gap-1">
+            <button
+              type="button"
+              className="text-sm font-bold tracking-wide uppercase text-gray-900 hover:text-blue-600 transition flex items-center gap-1"
+              aria-haspopup="menu"
+              aria-expanded={isServicesOpen}
+              aria-controls="services-menu"
+              id="services-menu-button"
+              tabIndex={0}
+              onClick={() => setIsServicesOpen((v) => !v)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                  setIsServicesOpen(true);
+                  e.preventDefault();
+                } else if (e.key === "Escape") {
+                  setIsServicesOpen(false);
+                }
+              }}
+            >
               Services
               <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
             </button>
-            
             {isServicesOpen && (
-              <div className="absolute left-0 mt-0 w-48 bg-white border-2 border-gray-900 shadow-lg rounded-lg py-2 z-50">
-                {servicesItems.map((item) => (
-                  <Link 
+              <ul
+                id="services-menu"
+                role="menu"
+                aria-labelledby="services-menu-button"
+                className="absolute left-0 mt-0 w-48 bg-white border-2 border-gray-900 shadow-lg rounded-lg py-2 z-50 no-list-style"
+                aria-orientation="vertical"
+              >
+                {servicesItems.map((item, idx) => (
+                  <Link
                     key={item.href}
                     href={item.href}
+                    role="menuitem"
+                    tabIndex={0}
                     className="block px-4 py-2 text-sm font-bold text-gray-900 hover:bg-blue-50 hover:text-blue-600 transition"
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") setIsServicesOpen(false);
+                      if (e.key === "ArrowDown") {
+                        const next = document.querySelectorAll('#services-menu [role="menuitem"]')[idx + 1];
+                        if (next) (next as HTMLElement).focus();
+                        e.preventDefault();
+                      }
+                      if (e.key === "ArrowUp") {
+                        const prev = document.querySelectorAll('#services-menu [role="menuitem"]')[idx - 1];
+                        if (prev) (prev as HTMLElement).focus();
+                        e.preventDefault();
+                      }
+                    }}
                   >
                     {item.label}
                   </Link>
                 ))}
-              </div>
+              </ul>
             )}
           </div>
 
@@ -128,6 +166,7 @@ export default function Header() {
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
@@ -167,9 +206,11 @@ export default function Header() {
 
           {/* Mobile Services Dropdown */}
           <div>
-            <button 
+            <button
+              type="button"
               onClick={() => setIsServicesOpen(!isServicesOpen)}
               className="w-full text-left text-sm font-bold tracking-wide uppercase text-gray-900 hover:text-blue-600 hover:bg-gray-50 px-3 py-2 rounded transition flex items-center justify-between"
+              aria-expanded={isServicesOpen}
             >
               Services
               <ChevronDown className={`w-4 h-4 transition-transform ${isServicesOpen ? "rotate-180" : ""}`} />
