@@ -10,7 +10,11 @@ export default function Workshops() {
   const [activeTab, setActiveTab] = useState<"public" | "ndis">("public");
   const [selectedWorkshop, setSelectedWorkshop] = useState<{ id: string; title: string; price: number } | null>(null);
 
-  const { data: workshops, isLoading } = trpc.workshops.list.useQuery();
+  const { data: workshops, isLoading, error } = trpc.workshops.list.useQuery();
+
+  if (error) {
+    console.error("Workshops query error:", error);
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -51,6 +55,11 @@ export default function Workshops() {
               {isLoading ? (
                 <div className="col-span-full text-center py-12">
                   <p className="text-gray-500">Loading workshops...</p>
+                </div>
+              ) : error ? (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-red-600 mb-2">Error loading workshops</p>
+                  <p className="text-gray-500 text-sm">{error.message}</p>
                 </div>
               ) : workshops && workshops.length > 0 ? (
                 workshops.map((workshop) => (

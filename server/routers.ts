@@ -25,7 +25,10 @@ export const appRouter = router({
 
   workshops: router({
     list: publicProcedure.query(async () => {
-      return await getWorkshops();
+      console.log("[Workshops] Query called");
+      const result = await getWorkshops();
+      console.log("[Workshops] Returning", result.length, "workshops");
+      return result;
     }),
     
     getById: publicProcedure
@@ -57,7 +60,10 @@ export const appRouter = router({
     list: publicProcedure
       .input(z.object({ category: z.string().optional() }).optional())
       .query(async ({ input }) => {
-        return await getProducts(input?.category);
+        console.log("[Products] Query called with category:", input?.category || "all");
+        const result = await getProducts(input?.category);
+        console.log("[Products] Returning", result.length, "products");
+        return result;
       }),
 
     // One-time seed endpoint - adds placeholder products
@@ -191,7 +197,10 @@ export const appRouter = router({
     list: publicProcedure
       .input(z.object({ category: z.string().optional() }).optional())
       .query(async ({ input }) => {
-        return await getPortfolioItems(input?.category);
+        console.log("[Portfolio] Query called with category:", input?.category || "all");
+        const result = await getPortfolioItems(input?.category);
+        console.log("[Portfolio] Returning", result.length, "items");
+        return result;
       }),
   }),
 

@@ -10,12 +10,16 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
+      console.log("[Database] Connecting to database...");
       const client = postgres(process.env.DATABASE_URL);
       _db = drizzle(client);
+      console.log("[Database] Connection successful");
     } catch (error) {
-      console.warn("[Database] Failed to connect:", error);
+      console.error("[Database] Failed to connect:", error);
       _db = null;
     }
+  } else if (!process.env.DATABASE_URL) {
+    console.warn("[Database] DATABASE_URL not set");
   }
   return _db;
 }
@@ -91,8 +95,18 @@ export async function getUser(id: string) {
 // Workshops queries
 export async function getWorkshops() {
   const db = await getDb();
-  if (!db) return [];
-  return await db.select().from(workshops).orderBy(desc(workshops.date));
+  if (!db) {
+    console.warn("[getWorkshops] Database not available");
+    return [];
+  }
+  try {
+    const result = await db.select().from(workshops).orderBy(desc(workshops.date));
+    console.log("[getWorkshops] Found", result.length, "workshops");
+    return result;
+  } catch (error) {
+    console.error("[getWorkshops] Query failed:", error);
+    return [];
+  }
 }
 
 export async function getWorkshopById(id: string) {
@@ -105,11 +119,23 @@ export async function getWorkshopById(id: string) {
 // Products queries
 export async function getProducts(category?: string) {
   const db = await getDb();
-  if (!db) return [];
-  if (category) {
-    return await db.select().from(products).where(eq(products.category, category));
+  if (!db) {
+    console.warn("[getProducts] Database not available");
+    return [];
   }
-  return await db.select().from(products);
+  try {
+    let result;
+    if (category) {
+      result = await db.select().from(products).where(eq(products.category, category));
+    } else {
+      result = await db.select().from(products);
+    }
+    console.log("[getProducts] Found", result.length, "products" + (category ? ` in category ${category}` : ""));
+    return result;
+  } catch (error) {
+    console.error("[getProducts] Query failed:", error);
+    return [];
+  }
 }
 
 export async function getProductById(id: string) {
@@ -122,11 +148,23 @@ export async function getProductById(id: string) {
 // Portfolio queries
 export async function getPortfolioItems(category?: string) {
   const db = await getDb();
-  if (!db) return [];
-  if (category) {
-    return await db.select().from(portfolioItems).where(eq(portfolioItems.category, category));
+  if (!db) {
+    console.warn("[getPortfolioItems] Database not available");
+    return [];
   }
-  return await db.select().from(portfolioItems);
+  try {
+    let result;
+    if (category) {
+      result = await db.select().from(portfolioItems).where(eq(portfolioItems.category, category));
+    } else {
+      result = await db.select().from(portfolioItems);
+    }
+    console.log("[getPortfolioItems] Found", result.length, "items" + (category ? ` in category ${category}` : ""));
+    return result;
+  } catch (error) {
+    console.error("[getPortfolioItems] Query failed:", error);
+    return [];
+  }
 }
 
 // Newsletter queries

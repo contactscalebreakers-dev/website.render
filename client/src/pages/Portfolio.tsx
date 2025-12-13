@@ -1,36 +1,17 @@
-import { useState, useEffect } from "react";
 import GlitchTitle from "@/components/GlitchTitle";
 import { Loader } from "lucide-react";
-
-interface PortfolioItem {
-  id: string;
-  title: string;
-  image: string;
-  description: string;
-  category: string;
-}
+import { trpc } from "@/lib/trpc";
 
 export default function Portfolio() {
-  const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: portfolio, isLoading, error } = trpc.portfolio.list.useQuery();
 
-  useEffect(() => {
-    fetch('/data/portfolio.json')
-      .then(res => res.json())
-      .then(data => {
-        setPortfolio(data);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        console.error('Failed to load portfolio:', err);
-        setIsLoading(false);
-      });
-  }, []);
+  if (error) {
+    console.error("Portfolio query error:", error);
+  }
 
-  const murals = portfolio.filter(item => item.category === "murals");
-  const designs = portfolio.filter(item => item.category === "design");
-  const toys = portfolio.filter(item => item.category === "toys");
-  const artworks = portfolio.filter(item => item.category === "artwork" || item.category === "original-artwork");
+  const murals = portfolio?.filter(item => item.category === "mural") || [];
+  const designs = portfolio?.filter(item => item.category === "3d-model") || [];
+  const artworks = portfolio?.filter(item => item.category === "canvas" || item.category === "portrait") || [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -59,11 +40,18 @@ export default function Portfolio() {
               <div className="flex justify-center py-12">
                 <Loader className="w-8 h-8 animate-spin text-gray-400" />
               </div>
+            ) : error ? (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center mb-8">
+                <p className="text-red-600 font-semibold mb-2">Error loading portfolio</p>
+                <p className="text-red-500 text-sm">{error.message}</p>
+              </div>
             ) : murals.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 {murals.map((item) => (
                   <div key={item.id} className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
-                    <img src={`/${item.image}`} alt={item.title} className="w-full h-64 object-cover" />
+                    {item.imageUrl && (
+                      <img src={item.imageUrl} alt={item.title} className="w-full h-64 object-cover" />
+                    )}
                     <div className="p-4 bg-white">
                       <h3 className="font-bold text-lg mb-1">{item.title}</h3>
                       <p className="text-gray-600 text-sm">{item.description}</p>
@@ -100,20 +88,22 @@ export default function Portfolio() {
               <div className="flex justify-center py-12">
                 <Loader className="w-8 h-8 animate-spin text-gray-400" />
               </div>
-            ) : (designs.length > 0 || toys.length > 0) ? (
+            ) : designs.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                {[...designs, ...toys].map((item) => (
+                {designs.map((item) => (
                   <div
                     key={item.id}
                     className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition"
                   >
-                    <div className="relative overflow-hidden bg-gray-100 aspect-square">
-                      <img
-                        src={`/${item.image}`}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    {item.imageUrl && (
+                      <div className="relative overflow-hidden bg-gray-100 aspect-square">
+                        <img
+                          src={item.imageUrl}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
                     <div className="p-6">
                       <h3 className="text-lg font-bold mb-2">{item.title}</h3>
                       <p className="text-gray-600 text-sm">{item.description}</p>
@@ -150,6 +140,11 @@ export default function Portfolio() {
               <div className="flex justify-center py-12">
                 <Loader className="w-8 h-8 animate-spin text-gray-400" />
               </div>
+            ) : error ? (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center mb-8">
+                <p className="text-red-600 font-semibold mb-2">Error loading portfolio</p>
+                <p className="text-red-500 text-sm">{error.message}</p>
+              </div>
             ) : artworks.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
                 {artworks.map((item) => (
@@ -157,13 +152,15 @@ export default function Portfolio() {
                     key={item.id}
                     className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition"
                   >
-                    <div className="relative overflow-hidden bg-gray-100 aspect-square">
-                      <img
-                        src={`/${item.image}`}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    {item.imageUrl && (
+                      <div className="relative overflow-hidden bg-gray-100 aspect-square">
+                        <img
+                          src={item.imageUrl}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
                     <div className="p-6">
                       <h3 className="text-lg font-bold mb-2">{item.title}</h3>
                       <p className="text-gray-600 text-sm">{item.description}</p>

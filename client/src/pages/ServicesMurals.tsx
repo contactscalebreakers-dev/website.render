@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -6,6 +6,10 @@ import GlitchTitle from "@/components/GlitchTitle";
 import { DollarSign } from "lucide-react";
 
 export default function ServicesMurals() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState<string | null>(null);
+  
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -306,15 +310,64 @@ export default function ServicesMurals() {
           </form>
           {/* Embedded Video at the bottom */}
           <div className="mt-10 flex justify-center">
-            <video
-              controls
-              width="640"
-              height="360"
-              className="rounded-lg shadow-lg w-full max-w-2xl"
-            >
-              <source src="/0FE664D0-7FE9-475E-A875-2596FC196451.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className="w-full max-w-2xl">
+              {videoError ? (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+                  <p className="text-red-600 font-semibold mb-2">Video failed to load</p>
+                  <p className="text-red-500 text-sm mb-4">{videoError}</p>
+                  <Button
+                    onClick={() => {
+                      setVideoError(null);
+                      if (videoRef.current) {
+                        videoRef.current.load();
+                      }
+                    }}
+                    variant="outline"
+                  >
+                    Retry
+                  </Button>
+                </div>
+              ) : (
+                <video
+                  ref={videoRef}
+                  src="/0FE664D0-7FE9-475E-A875-2596FC196451.mp4"
+                  controls
+                  preload="auto"
+                  width="640"
+                  height="360"
+                  className="rounded-lg shadow-lg w-full max-w-2xl"
+                  playsInline
+                  onError={(e) => {
+                    const video = e.currentTarget;
+                    const error = video.error;
+                    if (error) {
+                      let errorMsg = "Failed to load video";
+                      switch (error.code) {
+                        case error.MEDIA_ERR_ABORTED:
+                          errorMsg = "Video loading was aborted";
+                          break;
+                        case error.MEDIA_ERR_NETWORK:
+                          errorMsg = "Network error while loading video";
+                          break;
+                        case error.MEDIA_ERR_DECODE:
+                          errorMsg = "Video decoding error";
+                          break;
+                        case error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                          errorMsg = "Video format not supported";
+                          break;
+                      }
+                      console.error("[Video] Error:", errorMsg, error);
+                      setVideoError(errorMsg);
+                    }
+                  }}
+                  onLoadedData={() => {
+                    setVideoError(null);
+                  }}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              )}
+            </div>
           </div>
         </div>
       </section>
