@@ -25,7 +25,7 @@ export default function Header() {
       <nav aria-label="Main navigation" className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-          <img src="/logo-main.png" alt="Scale Breakers - Home" className="h-12 w-auto hover:scale-105 transition" />
+          <img src="/logo-main.webp" alt="Scale Breakers - Home" className="h-12 w-auto hover:scale-105 transition" />
         </Link>
 
         {/* Desktop Navigation */}

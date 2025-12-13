@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "title": "West End Mural Commission",
+    "image": "A3AFCEA8-BDBA-475A-B647-13CAD3DA9DA7.webp",
+    "description": "Large-scale urban art installation",
+    "category": "murals"
+  },
+  {
+    "id": "2",
+    "title": "Character Design Series",
+    "image": "8A98DE36-8DC3-45DC-BA7C-2AA7AD1A8DB1.webp",
+    "description": "Animorphic hybrid character collection",
+    "category": "design"
+  },
+  {
+    "id": "3",
+    "title": "3D Collectible Prototype",
+    "image": "85156682-8690-47FD-AEEB-3434D3146FC0.webp",
+    "description": "Designer toy prototype and digital model",
+    "category": "toys"
+  }
+]

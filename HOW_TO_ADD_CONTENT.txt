@@ -1,0 +1,116 @@
+=================================================================
+HOW TO ADD PRODUCTS & PORTFOLIO IMAGES - SUPER SIMPLE
+=================================================================
+
+You have 2 simple text files to edit:
+- C:\Users\danka\Documents\SB_WEBSITE_VERSIONS\scale-breakers-fix\client\public\data\products.json
+- C:\Users\danka\Documents\SB_WEBSITE_VERSIONS\scale-breakers-fix\client\public\data\portfolio.json
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 TO ADD A PRODUCT:
+
+1. Open products.json in Notepad
+2. Copy this block:
+
+  {
+    "id": "3",
+    "title": "YOUR PRODUCT NAME HERE",
+    "image": "YOUR-IMAGE-FILENAME.webp",
+    "price": 99,
+    "description": "Your product description here",
+    "category": "toys"
+  }
+
+3. Paste it BEFORE the final ] bracket
+4. Add a comma after the previous entry
+5. Change the id number (make it unique: 3, 4, 5, etc.)
+6. Change title, image filename, price, description
+7. Category options: "toys", "art", "murals", "design"
+8. Save the file
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎨 TO ADD A PORTFOLIO IMAGE:
+
+1. Open portfolio.json in Notepad
+2. Copy this block:
+
+  {
+    "id": "4",
+    "title": "YOUR WORK TITLE HERE",
+    "image": "YOUR-IMAGE-FILENAME.webp",
+    "description": "Description of this work",
+    "category": "murals"
+  }
+
+3. Paste it BEFORE the final ] bracket
+4. Add a comma after the previous entry
+5. Change the id number (make it unique)
+6. Change title, image filename, description
+7. Category options: "murals", "design", "toys"
+8. Save the file
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📸 IMAGES:
+
+- Put ALL images in: C:\Users\danka\Documents\SB_WEBSITE_VERSIONS\scale-breakers-fix\client\public\
+- Use .webp format (optimized images already there)
+- Just type the FILENAME in the JSON (like "IMG_1234.webp")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 PUSH TO WEBSITE:
+
+After editing, run these 3 commands:
+
+cd C:\Users\danka\Documents\SB_WEBSITE_VERSIONS\scale-breakers-fix
+git add .
+git commit -m "Added new products"
+git push origin main
+
+Your changes appear on the website in ~2 minutes.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ IMPORTANT JSON RULES:
+
+✅ DO:
+- Use double quotes "like this" not 'like this'
+- Add commas between entries
+- Keep the square brackets [ ]
+- Make each id unique
+
+❌ DON'T:
+- Forget commas between entries
+- Add a comma after the LAST entry (before ])
+- Use single quotes
+- Delete the square brackets
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXAMPLE COMPLETE FILE:
+
+[
+  {
+    "id": "1",
+    "title": "Blue Dragon Toy",
+    "image": "dragon.webp",
+    "price": 45,
+    "description": "Hand-painted",
+    "category": "toys"
+  },
+  {
+    "id": "2",
+    "title": "Red Dragon Toy",
+    "image": "dragon2.webp",
+    "price": 50,
+    "description": "Limited edition",
+    "category": "toys"
+  }
+]
+
+NOTICE: Comma after entry 1, NO comma after entry 2
+
+=================================================================

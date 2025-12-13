@@ -1,62 +1,79 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { trpc } from "@/lib/trpc";
 import { ShoppingCart, Loader, Filter } from "lucide-react";
 import GlitchTitle from "@/components/GlitchTitle";
 import { useToast } from "@/hooks/use-toast";
 
+interface Product {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  description: string;
+  category: string;
+}
+
 const CATEGORIES = [
   { id: "all", label: "All Products" },
-  { id: "3d-model", label: "3D Models" },
-  { id: "canvas", label: "Canvas Art" },
-  { id: "diorama", label: "Dioramas" },
-  { id: "workshop", label: "Workshops" },
-  { id: "other", label: "Other" },
+  { id: "toys", label: "Designer Toys" },
+  { id: "art", label: "Art & Prints" },
+  { id: "murals", label: "Mural Commissions" },
 ];
 
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const { data: products, isLoading, refetch } = trpc.products.list.useQuery({
-    category: selectedCategory === "all" ? undefined : selectedCategory,
-  });
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
 
-  const seedMutation = trpc.products.seedProducts.useMutation({
-    onSuccess: (data) => {
-      if (data.success) {
-        toast({ title: "Products Added!", description: data.message });
-        refetch();
-      } else {
-        toast({ title: "Info", description: data.message });
-      }
-    },
-    onError: (error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
-    },
-  });
+  useEffect(() => {
+    fetch('/data/products.json')
+import { useState, useEffect } from "react";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart, Loader, Filter } from "lucide-react";
+import GlitchTitle from "@/components/GlitchTitle";
+import { useToast } from "@/hooks/use-toast";
 
-  const checkoutMutation = trpc.payments.createProductCheckout.useMutation({
-    onSuccess: (data) => {
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    },
-    onError: (error) => {
-      toast({
-        title: "Checkout Failed",
-        description: error.message || "Failed to start checkout. Please try again.",
-        variant: "destructive",
+interface Product {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+  description: string;
+  category: string;
+}
+
+const CATEGORIES = [
+  { id: "all", label: "All Products" },
+  { id: "toys", label: "Designer Toys" },
+  { id: "art", label: "Art & Prints" },
+  { id: "murals", label: "Mural Commissions" },
+];
+
+export default function Products() {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetch('/data/products.json')
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to load products:', err);
+        setIsLoading(false);
       });
-    },
-  });
+  }, []);
 
-  const handleBuyNow = (productId: string) => {
-    checkoutMutation.mutate({
-      productId,
-      quantity: 1,
-    });
-  };
+  const filteredProducts = selectedCategory === "all" 
+    ? products 
+    : products.filter(p => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-white">
@@ -108,63 +125,40 @@ export default function Products() {
                 <div className="flex justify-center py-12">
                   <Loader className="w-8 h-8 animate-spin text-gray-400" />
                 </div>
-              ) : products && products.length > 0 ? (
+              ) : filteredProducts.length > 0 ? (
                 <>
                   <p className="text-gray-600 mb-6">
-                    Showing {products.length} product{products.length !== 1 ? "s" : ""}
+                    Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
                   </p>
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {products.map((product) => (
+                    {filteredProducts.map((product) => (
                       <div
                         key={product.id}
                         className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition flex flex-col h-full"
                       >
-                        {product.imageUrl && (
-                          <div className="relative overflow-hidden bg-gray-100 aspect-square">
-                            <img
-                              src={product.imageUrl}
-                              alt={product.name}
-                              className="w-full h-full object-cover hover:scale-105 transition duration-300"
-                            />
-                            {product.isOneOfOne === "true" && (
-                              <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                                ✦ One of a Kind
-                              </div>
-                            )}
-                          </div>
-                        )}
+                        <div className="relative overflow-hidden bg-gray-100 aspect-square">
+                          <img
+                            src={`/${product.image}`}
+                            alt={product.title}
+                            className="w-full h-full object-cover hover:scale-105 transition duration-300"
+                          />
+                        </div>
                         <div className="p-6">
-                          <h3 className="text-lg font-bold mb-2 line-clamp-2">{product.name}</h3>
-                          {product.description && (
-                            <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                              {product.description}
+                          <h3 className="text-lg font-bold mb-2 line-clamp-2">{product.title}</h3>
+                          <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                            {product.description}
+                          </p>
+                          <div className="mb-4">
+                            <p className="text-2xl font-bold text-black">
+                              ${product.price}
                             </p>
-                          )}
-
-                          <div className="mb-4 flex items-center justify-between">
-                            <div>
-                              <p className="text-2xl font-bold text-black">
-                                ${product.price}
-                              </p>
-                            </div>
-                            {product.stock && parseInt(product.stock) > 0 && (
-                              <p className="text-xs text-gray-500 text-right">
-                                {product.stock} in stock
-                              </p>
-                            )}
                           </div>
-
                           <Button 
                             className="w-full flex items-center justify-center gap-2"
-                            disabled={!product.stock || parseInt(product.stock) === 0 || checkoutMutation.isPending}
-                            onClick={() => handleBuyNow(product.id)}
+                            onClick={() => toast({ title: "Contact Us", description: "Email contact.scalebreakers@gmail.com to purchase" })}
                           >
                             <ShoppingCart className="w-4 h-4" />
-                            {checkoutMutation.isPending 
-                              ? "Processing..." 
-                              : product.stock && parseInt(product.stock) > 0 
-                                ? "Buy Now - Stripe" 
-                                : "Out of Stock"}
+                            Buy Now
                           </Button>
                         </div>
                       </div>
@@ -174,14 +168,7 @@ export default function Products() {
               ) : (
                 <div className="text-center py-12">
                   <p className="text-gray-600 mb-4">No products in this category.</p>
-                  <p className="text-gray-500 mb-6">Check back soon for new items!</p>
-                  <Button 
-                    onClick={() => seedMutation.mutate()}
-                    disabled={seedMutation.isPending}
-                    variant="outline"
-                  >
-                    {seedMutation.isPending ? "Adding..." : "Add Sample Products"}
-                  </Button>
+                  <p className="text-gray-500">Check back soon for new items!</p>
                 </div>
               )}
             </div>

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "title": "Custom 3D Resin Toy",
+    "image": "1BA64303-CAD3-4DD9-BAAD-FBA1A60F45DC.webp",
+    "price": 45,
+    "description": "Hand-painted designer toy, limited edition",
+    "category": "toys"
+  },
+  {
+    "id": "2",
+    "title": "Urban Art Print",
+    "image": "7C9A3532-6F8E-4F26-BA1D-A6D93AD87353.webp",
+    "price": 25,
+    "description": "High-quality print of original street art",
+    "category": "art"
+  }
+]

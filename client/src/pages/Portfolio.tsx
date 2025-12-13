@@ -1,9 +1,35 @@
+import { useState, useEffect } from "react";
 import GlitchTitle from "@/components/GlitchTitle";
-import { trpc } from "@/lib/trpc";
 import { Loader } from "lucide-react";
 
+interface PortfolioItem {
+  id: string;
+  title: string;
+  image: string;
+  description: string;
+  category: string;
+}
+
 export default function Portfolio() {
-  const { data: products, isLoading } = trpc.products.list.useQuery({});
+  const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/data/portfolio.json')
+      .then(res => res.json())
+      .then(data => {
+        setPortfolio(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to load portfolio:', err);
+        setIsLoading(false);
+      });
+  }, []);
+
+  const murals = portfolio.filter(item => item.category === "murals");
+  const designs = portfolio.filter(item => item.category === "design");
+  const toys = portfolio.filter(item => item.category === "toys");
 
   return (
     <div className="min-h-screen bg-white">
@@ -28,19 +54,27 @@ export default function Portfolio() {
               Large-scale commissions for businesses, councils, and community spaces across Brisbane.
             </p>
 
-            {/* Temporarily hidden until real images are available */}
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
-                <img src="/A3AFCEA8-BDBA-475A-B647-13CAD3DA9DA7.png" alt="Mural 1" className="w-full h-64 object-cover" />
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <Loader className="w-8 h-8 animate-spin text-gray-400" />
               </div>
-              <div className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
-                <img src="/8A98DE36-8DC3-45DC-BA7C-2AA7AD1A8DB1.png" alt="Mural 2" className="w-full h-64 object-cover" />
+            ) : murals.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                {murals.map((item) => (
+                  <div key={item.id} className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
+                    <img src={`/${item.image}`} alt={item.title} className="w-full h-64 object-cover" />
+                    <div className="p-4 bg-white">
+                      <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                      <p className="text-gray-600 text-sm">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
-                <img src="/85156682-8690-47FD-AEEB-3434D3146FC0.png" alt="Mural 3" className="w-full h-64 object-cover" />
+            ) : (
+              <div className="bg-white border-2 border-dashed border-gray-300 rounded-lg p-12 text-center mb-8">
+                <p className="text-gray-500 text-lg">Mural images coming soon</p>
               </div>
-            </div>
+            )}
 
             <div className="space-y-3 text-gray-700">
               <p><strong>Brisbane CBD Street Art Series</strong> — Large-scale murals featuring local culture and community themes</p>
@@ -65,37 +99,23 @@ export default function Portfolio() {
               <div className="flex justify-center py-12">
                 <Loader className="w-8 h-8 animate-spin text-gray-400" />
               </div>
-            ) : products && products.length > 0 ? (
+            ) : (designs.length > 0 || toys.length > 0) ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                {products.map((product) => (
+                {[...designs, ...toys].map((item) => (
                   <div
-                    key={product.id}
+                    key={item.id}
                     className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition"
                   >
-                    {product.imageUrl && (
-                      <div className="relative overflow-hidden bg-gray-100 aspect-square">
-                        <img
-                          src={product.imageUrl}
-                          alt={product.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                          SOLD
-                        </div>
-                        {product.isOneOfOne === "true" && (
-                          <div className="absolute top-3 left-3 bg-black text-white px-3 py-1 rounded-full text-xs font-bold">
-                            ✦ 1/1
-                          </div>
-                        )}
-                      </div>
-                    )}
+                    <div className="relative overflow-hidden bg-gray-100 aspect-square">
+                      <img
+                        src={`/${item.image}`}
+                        alt={item.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div className="p-6">
-                      <h3 className="text-lg font-bold mb-2">{product.name}</h3>
-                      {product.description && (
-                        <p className="text-gray-600 text-sm">
-                          {product.description}
-                        </p>
-                      )}
+                      <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                      <p className="text-gray-600 text-sm">{item.description}</p>
                     </div>
                   </div>
                 ))}
@@ -111,30 +131,6 @@ export default function Portfolio() {
               <p><strong>Collectible Figurines</strong> — Custom-designed toys and figures for independent creators and collectors</p>
               <p><strong>Urban Dioramas</strong> — Miniature street scenes combining 3D models and hand-painted details</p>
               <p><strong>Digital Renders</strong> — Character design and experimental 3D work</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Workshop Highlights */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold mb-4">Workshop Highlights</h2>
-            <p className="text-gray-600 text-lg mb-12">
-              Student creations from creative workshops across Brisbane.
-            </p>
-
-            {/* Temporarily hidden until real images are available */}
-            <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-12 text-center mb-8">
-              <p className="text-gray-500 text-lg">Workshop images coming soon</p>
-            </div>
-
-            <div className="space-y-3 text-gray-700">
-              <p><strong>Street Art Foundations</strong> — Student pieces from graffiti and stencil workshops</p>
-              <p><strong>3D Diorama Projects</strong> — Miniature urban scenes created by participants</p>
-              <p><strong>Character Design Sessions</strong> — Original creations from beginner and advanced workshops</p>
-              <p><strong>NDIS Program Outcomes</strong> — Artwork and projects from supported creative sessions</p>
             </div>
           </div>
         </div>
