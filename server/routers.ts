@@ -82,7 +82,7 @@ export const appRouter = router({
             category: "3d-model" as const,
             price: 350,
             stock: 5,
-            imageUrl: "/portfolio-character.png",
+            imageUrl: "/portfolio-character.webp",
             isOneOfOne: false,
           },
           {
