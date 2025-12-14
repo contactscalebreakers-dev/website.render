@@ -7181,6 +7181,11 @@ snapshots:
   arr-union@3.1.0: {}
 
   array-flatten@1.1.1: {}
+   dependabot/npm_and_yarn/website.render/tar-7.5.2
+
+
+  array-unique@0.3.2: {}
+   main
 
   array-unique@0.3.2: {}
 
@@ -7589,10 +7594,16 @@ snapshots:
     dependencies:
       es6-promise: 4.2.8
 
+ dependabot/npm_and_yarn/website.render/tar-7.5.2
+dependabot/npm_and_yarn/website.render/tar-7.5.2
+  esbuild-register@3.6.0(esbuild@0.25.10):
+  esbuild-register@3.6.0(esbuild@0.25.12)main
+
  dependabot/npm_and_yarn/website.render/vite-7.1.11
   esbuild-register@3.6.0(esbuild@0.25.10):
 
   esbuild-register@3.6.0(esbuild@0.25.12):
+ main
  main
     dependencies:
       debug: 4.4.3
