@@ -7191,9 +7191,17 @@ snapshots:
 
   array-flatten@1.1.1: {}
  dependabot/npm_and_yarn/website.render/nodemailer-7.0.11
+ dependabot/npm_and_yarn/website.render/nodemailer-7.0.11
 
   array-unique@0.3.2: {}
 
+ main
+
+   dependabot/npm_and_yarn/website.render/tar-7.5.2
+
+
+  array-unique@0.3.2: {}
+   main
  main
 
   array-unique@0.3.2: {}
@@ -7604,12 +7612,20 @@ snapshots:
       es6-promise: 4.2.8
 
  dependabot/npm_and_yarn/website.render/nodemailer-7.0.11
+ dependabot/npm_and_yarn/website.render/nodemailer-7.0.11
+
+ dependabot/npm_and_yarn/website.render/tar-7.5.2
+dependabot/npm_and_yarn/website.render/tar-7.5.2
+  esbuild-register@3.6.0(esbuild@0.25.10):
+  esbuild-register@3.6.0(esbuild@0.25.12)main
+ main
 
  dependabot/npm_and_yarn/website.render/vite-7.1.11
  main
   esbuild-register@3.6.0(esbuild@0.25.10):
 
   esbuild-register@3.6.0(esbuild@0.25.12):
+ main
  main
     dependencies:
       debug: 4.4.3
