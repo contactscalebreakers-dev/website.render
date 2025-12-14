@@ -8,7 +8,6 @@ import { useToast } from "@/hooks/use-toast";
 
 const CATEGORIES = [
   { id: "all", label: "All Products" },
-  { id: "workshop", label: "Workshop Tickets" },
   { id: "3d-model", label: "3D Models" },
   { id: "diorama", label: "Urban Dioramas" },
   { id: "canvas", label: "Canvas Artwork" },
@@ -53,12 +52,12 @@ export default function Products() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-green-50 to-green-100 py-12">
         <div className="container mx-auto px-4">
-          <GlitchTitle as="h1" className="text-4xl md:text-5xl font-bold mb-4">Shop</GlitchTitle>
+          <GlitchTitle as="h1" className="text-4xl md:text-5xl font-bold mb-4">Products</GlitchTitle>
           <p className="text-lg text-gray-700 mb-2">
-            Original artwork and collectibles available for purchase right now.
+            Collectible art and 3D figurines available for purchase.
           </p>
           <p className="text-sm text-gray-600">
-            Looking for past work? Check out the <Link href="/portfolio" className="text-blue-600 font-semibold hover:underline">Portfolio</Link> →
+            Looking for past work? Check out the <Link href="/about" className="text-blue-600 font-semibold hover:underline">About/Portfolio</Link> →
           </p>
         </div>
       </section>

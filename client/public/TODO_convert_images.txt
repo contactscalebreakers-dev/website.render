@@ -1,3 +1,2 @@
 {
-  "task": "Convert the attached images to WebP format and save them in client/public as rove-hi-there.webp and rove-media.webp. Then add them to the murals section in portfolio.json with the following details: title: 'Rove Creative Murals', description: 'Murals for Rove Creative, South Bank (Hi There / Media)', category: 'murals'."
-}
+  "task": "Keep all images highly optimized, save them in client/public. 

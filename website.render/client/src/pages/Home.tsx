@@ -138,10 +138,12 @@ export default function Home() {
             {/* Video 1 */}
             <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden">
               <video
-                src="/23_9_2025-2.mp4"
+                src="/3D Scan Wall3.webm"
                 autoPlay
                 loop
                 muted
+                playsInline
+                poster="/portfolio-hithere.webp"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -149,10 +151,12 @@ export default function Home() {
             {/* Video 2 */}
             <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden">
               <video
-                src="/esrgan_1754305784.mp4"
+                src="/3D Scan 2.webm"
                 autoPlay
                 loop
                 muted
+                playsInline
+                poster="/portfolio-media.webp"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -160,10 +164,12 @@ export default function Home() {
             {/* Video 3 */}
             <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden">
               <video
-                src="/29_9_2025.mp4"
+                src="/3D scan wall1.webm"
                 autoPlay
                 loop
                 muted
+                playsInline
+                poster="/portfolio-street-art.webp"
                 className="w-full h-full object-cover"
               />
             </div>

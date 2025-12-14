@@ -101,7 +101,7 @@ export default function Workshops() {
                         </div>
                         <Button
                           size="sm"
-                          onClick={() => setSelectedWorkshop({ id: workshop.id, title: workshop.title, price: parseInt(workshop.price as string) || 20 })}
+                          onClick={() => setSelectedWorkshop({ id: workshop.id, title: workshop.title, price: parseInt(workshop.price as string) || 15 })}
                         >
                           Book / Enquire
                         </Button>

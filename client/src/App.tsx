@@ -18,6 +18,10 @@ import Services3DScanning from "./pages/Services3DScanning";
 import ServicesMurals from "./pages/ServicesMurals";
 import Services3DModelling from "./pages/Services3DModelling";
 import AdminBookings from "./pages/AdminBookings";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminWorkshops from "./pages/AdminWorkshops";
+import AdminPortfolio from "./pages/AdminPortfolio";
 
 function Router() {
   return (
@@ -33,6 +37,10 @@ function Router() {
           <Route path={"/portfolio"} component={Portfolio} />
           <Route path={"/about"} component={About} />
           <Route path={"/contact"} component={Contact} />
+          <Route path={"/admin/login"} component={AdminLogin} />
+          <Route path={"/admin/dashboard"} component={AdminDashboard} />
+          <Route path={"/admin/workshops"} component={AdminWorkshops} />
+          <Route path={"/admin/portfolio"} component={AdminPortfolio} />
           <Route path={"/admin/products"} component={AdminProducts} />
           <Route path={"/services"} component={Services} />
           <Route path={"/services/3d-scanning"} component={Services3DScanning} />

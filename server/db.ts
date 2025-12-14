@@ -116,6 +116,62 @@ export async function getWorkshopById(id: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
+export async function createWorkshop(data: any) {
+  const db = await getDb();
+  if (!db) return null;
+  try {
+    await db.insert(workshops).values({
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      date: new Date(data.date),
+      time: data.time,
+      location: data.location,
+      price: data.price.toString(),
+      capacity: data.capacity.toString(),
+      imageUrl: data.imageUrl || null,
+    });
+    return true;
+  } catch (error) {
+    console.error("Failed to create workshop:", error);
+    return null;
+  }
+}
+
+export async function updateWorkshop(id: string, data: any) {
+  const db = await getDb();
+  if (!db) return null;
+  try {
+    const updateData: any = {};
+    if (data.title !== undefined) updateData.title = data.title;
+    if (data.description !== undefined) updateData.description = data.description;
+    if (data.date !== undefined) updateData.date = new Date(data.date);
+    if (data.time !== undefined) updateData.time = data.time;
+    if (data.location !== undefined) updateData.location = data.location;
+    if (data.price !== undefined) updateData.price = data.price.toString();
+    if (data.capacity !== undefined) updateData.capacity = data.capacity.toString();
+    if (data.imageUrl !== undefined) updateData.imageUrl = data.imageUrl;
+    
+    await db.update(workshops).set(updateData).where(eq(workshops.id, id));
+    return true;
+  } catch (error) {
+    console.error("Failed to update workshop:", error);
+    return null;
+  }
+}
+
+export async function deleteWorkshop(id: string) {
+  const db = await getDb();
+  if (!db) return null;
+  try {
+    await db.delete(workshops).where(eq(workshops.id, id));
+    return true;
+  } catch (error) {
+    console.error("Failed to delete workshop:", error);
+    return null;
+  }
+}
+
 // Products queries
 export async function getProducts(category?: string) {
   const db = await getDb();
@@ -164,6 +220,54 @@ export async function getPortfolioItems(category?: string) {
   } catch (error) {
     console.error("[getPortfolioItems] Query failed:", error);
     return [];
+  }
+}
+
+export async function createPortfolioItem(data: any) {
+  const db = await getDb();
+  if (!db) return null;
+  try {
+    await db.insert(portfolioItems).values({
+      id: data.id,
+      title: data.title,
+      description: data.description,
+      category: data.category,
+      imageUrl: data.imageUrl || null,
+    });
+    return true;
+  } catch (error) {
+    console.error("Failed to create portfolio item:", error);
+    return null;
+  }
+}
+
+export async function updatePortfolioItem(id: string, data: any) {
+  const db = await getDb();
+  if (!db) return null;
+  try {
+    const updateData: any = {};
+    if (data.title !== undefined) updateData.title = data.title;
+    if (data.description !== undefined) updateData.description = data.description;
+    if (data.category !== undefined) updateData.category = data.category;
+    if (data.imageUrl !== undefined) updateData.imageUrl = data.imageUrl;
+    
+    await db.update(portfolioItems).set(updateData).where(eq(portfolioItems.id, id));
+    return true;
+  } catch (error) {
+    console.error("Failed to update portfolio item:", error);
+    return null;
+  }
+}
+
+export async function deletePortfolioItem(id: string) {
+  const db = await getDb();
+  if (!db) return null;
+  try {
+    await db.delete(portfolioItems).where(eq(portfolioItems.id, id));
+    return true;
+  } catch (error) {
+    console.error("Failed to delete portfolio item:", error);
+    return null;
   }
 }
 

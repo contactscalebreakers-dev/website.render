@@ -6,6 +6,18 @@
 
 import postgres from 'postgres';
 import crypto from 'crypto';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env file (try .env first, then .env.txt)
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+if (!process.env.DATABASE_URL) {
+  dotenv.config({ path: path.resolve(__dirname, '.env.txt') });
+}
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -19,7 +31,7 @@ if (!connectionString) {
   process.exit(1);
 }
 
-const client = postgres(connectionString);
+const client = postgres(connectionString, { prepare: false });
 
 async function seed() {
   console.log('🌱 Seeding production database...\n');
@@ -43,7 +55,7 @@ async function seed() {
         date: new Date('2024-12-21T14:00:00Z'),
         time: '2:00 PM',
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
-        price: '85',
+        price: '15',
         capacity: '23',
         imageUrl: '/workshops/designer-toy.webp'
       },
@@ -54,7 +66,7 @@ async function seed() {
         date: new Date('2025-01-04T14:00:00Z'),
         time: '2:00 PM',
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
-        price: '75',
+        price: '15',
         capacity: '23',
         imageUrl: '/workshops/street-art.webp'
       },
@@ -65,7 +77,7 @@ async function seed() {
         date: new Date('2025-01-18T14:00:00Z'),
         time: '2:00 PM',
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
-        price: '90',
+        price: '15',
         capacity: '23',
         imageUrl: '/workshops/diorama.webp'
       },

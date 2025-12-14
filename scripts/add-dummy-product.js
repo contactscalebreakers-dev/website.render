@@ -12,7 +12,7 @@ async function addDummyProduct() {
       category: '3d-model',
       price: '450',
       stock: '1',
-      imageUrl: '/products/street-fighter-figure.jpg',
+      imageUrl: '/products/street-fighter-figure.webp',
       isOneOfOne: 'true',
       createdAt: new Date()
     };
