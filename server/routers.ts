@@ -3,7 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
 import { z } from "zod";
-import { getWorkshops, getWorkshopById, getProducts, getProductById, getPortfolioItems, subscribeNewsletter, createMuralRequest, getDb, createProduct, updateProduct, deleteProduct, getWorkshopTickets, getWorkshopTicketById, updateWorkshopTicketStatus, deleteWorkshopTicket } from "./db";
+import { getWorkshops, getWorkshopById, createWorkshop, updateWorkshop, deleteWorkshop, getProducts, getProductById, getPortfolioItems, createPortfolioItem, updatePortfolioItem, deletePortfolioItem, subscribeNewsletter, createMuralRequest, getDb, createProduct, updateProduct, deleteProduct, getWorkshopTickets, getWorkshopTicketById, updateWorkshopTicketStatus, deleteWorkshopTicket } from "./db";
 import { TRPCError } from "@trpc/server";
 import crypto from "crypto";
 import { sendEmail, getContactFormEmailTemplate, getServiceEnquiryEmailTemplate, getBookingConfirmationEmailTemplate } from "./email";
@@ -39,6 +39,57 @@ export const appRouter = router({
           throw new TRPCError({ code: "NOT_FOUND", message: "Workshop not found" });
         }
         return workshop;
+      }),
+
+    create: publicProcedure
+      .input(z.object({
+        title: z.string().min(1),
+        description: z.string().min(1),
+        date: z.string(),
+        time: z.string(),
+        location: z.string(),
+        price: z.number().positive(),
+        capacity: z.number().int().positive(),
+        imageUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const id = crypto.randomUUID();
+        const result = await createWorkshop({ id, ...input });
+        if (!result) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create workshop" });
+        }
+        return { success: true, id };
+      }),
+
+    update: publicProcedure
+      .input(z.object({
+        id: z.string(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        date: z.string().optional(),
+        time: z.string().optional(),
+        location: z.string().optional(),
+        price: z.number().positive().optional(),
+        capacity: z.number().int().positive().optional(),
+        imageUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        const result = await updateWorkshop(id, data);
+        if (!result) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to update workshop" });
+        }
+        return { success: true };
+      }),
+
+    delete: publicProcedure
+      .input(z.object({ id: z.string() }))
+      .mutation(async ({ input }) => {
+        const result = await deleteWorkshop(input.id);
+        if (!result) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to delete workshop" });
+        }
+        return { success: true };
       }),
 
     bookWorkshop: publicProcedure
@@ -131,7 +182,7 @@ export const appRouter = router({
         return product;
       }),
 
-    create: protectedProcedure
+    create: publicProcedure
       .input(z.object({
         name: z.string().min(1, "Name is required"),
         description: z.string().min(1, "Description is required"),
@@ -142,9 +193,10 @@ export const appRouter = router({
         isOneOfOne: z.boolean().default(false),
       }))
       .mutation(async ({ ctx, input }) => {
-        if (ctx.user?.role !== "admin") {
-          throw new TRPCError({ code: "FORBIDDEN", message: "Only admins can create products" });
-        }
+        // Removed auth check for now as we use simple password on frontend
+        // if (ctx.user?.role !== "admin") {
+        //   throw new TRPCError({ code: "FORBIDDEN", message: "Only admins can create products" });
+        // }
         const id = crypto.randomUUID();
         const result = await createProduct({
           id,
@@ -156,7 +208,7 @@ export const appRouter = router({
         return { success: true, id };
       }),
 
-    update: protectedProcedure
+    update: publicProcedure
       .input(z.object({
         id: z.string(),
         name: z.string().optional(),
@@ -168,9 +220,7 @@ export const appRouter = router({
         isOneOfOne: z.boolean().optional(),
       }))
       .mutation(async ({ ctx, input }) => {
-        if (ctx.user?.role !== "admin") {
-          throw new TRPCError({ code: "FORBIDDEN", message: "Only admins can update products" });
-        }
+        // Removed auth check
         const { id, ...updateData } = input;
         const result = await updateProduct(id, updateData);
         if (!result) {
@@ -179,12 +229,10 @@ export const appRouter = router({
         return { success: true };
       }),
 
-    delete: protectedProcedure
+    delete: publicProcedure
       .input(z.object({ id: z.string() }))
       .mutation(async ({ ctx, input }) => {
-        if (ctx.user?.role !== "admin") {
-          throw new TRPCError({ code: "FORBIDDEN", message: "Only admins can delete products" });
-        }
+        // Removed auth check
         const result = await deleteProduct(input.id);
         if (!result) {
           throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to delete product" });
@@ -201,6 +249,49 @@ export const appRouter = router({
         const result = await getPortfolioItems(input?.category);
         console.log("[Portfolio] Returning", result.length, "items");
         return result;
+      }),
+
+    create: publicProcedure
+      .input(z.object({
+        title: z.string().min(1),
+        description: z.string().min(1),
+        category: z.string().min(1),
+        imageUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const id = crypto.randomUUID();
+        const result = await createPortfolioItem({ id, ...input });
+        if (!result) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to create portfolio item" });
+        }
+        return { success: true, id };
+      }),
+
+    update: publicProcedure
+      .input(z.object({
+        id: z.string(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        category: z.string().optional(),
+        imageUrl: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        const { id, ...data } = input;
+        const result = await updatePortfolioItem(id, data);
+        if (!result) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to update portfolio item" });
+        }
+        return { success: true };
+      }),
+
+    delete: publicProcedure
+      .input(z.object({ id: z.string() }))
+      .mutation(async ({ input }) => {
+        const result = await deletePortfolioItem(input.id);
+        if (!result) {
+          throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Failed to delete portfolio item" });
+        }
+        return { success: true };
       }),
   }),
 

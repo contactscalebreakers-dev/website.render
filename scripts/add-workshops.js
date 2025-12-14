@@ -17,7 +17,7 @@ async function addWorkshops() {
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '85',
         capacity: '23',
-        imageUrl: '/workshops/designer-toy.jpg'
+        imageUrl: '/workshops/designer-toy.webp'
       },
       {
         id: crypto.randomUUID(),
@@ -28,7 +28,7 @@ async function addWorkshops() {
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '75',
         capacity: '23',
-        imageUrl: '/workshops/street-art.jpg'
+        imageUrl: '/workshops/street-art.webp'
       },
       {
         id: crypto.randomUUID(),
@@ -39,7 +39,7 @@ async function addWorkshops() {
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '90',
         capacity: '23',
-        imageUrl: '/workshops/diorama.jpg'
+        imageUrl: '/workshops/diorama.webp'
       },
       {
         id: crypto.randomUUID(),
@@ -50,7 +50,7 @@ async function addWorkshops() {
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '80',
         capacity: '23',
-        imageUrl: '/workshops/3d-painting.jpg'
+        imageUrl: '/workshops/3d-painting.webp'
       },
       {
         id: crypto.randomUUID(),
@@ -61,7 +61,7 @@ async function addWorkshops() {
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '70',
         capacity: '23',
-        imageUrl: '/workshops/canvas-art.jpg'
+        imageUrl: '/workshops/canvas-art.webp'
       },
       {
         id: crypto.randomUUID(),
@@ -72,7 +72,7 @@ async function addWorkshops() {
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '95',
         capacity: '23',
-        imageUrl: '/workshops/character-design.jpg'
+        imageUrl: '/workshops/character-design.webp'
       }
     ];
 

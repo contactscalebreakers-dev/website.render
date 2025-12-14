@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import Header from "@/components/Header";
-import { Loader, Plus, Edit2, Trash2, X } from "lucide-react";
+import { Loader, Plus, Edit2, Trash2, X, ArrowLeft } from "lucide-react";
 import GlitchTitle from "@/components/GlitchTitle";
 
 interface ProductForm {
@@ -17,7 +17,8 @@ interface ProductForm {
 }
 
 export default function AdminProducts() {
-  const { user, loading: authLoading } = useAuth();
+  const [, setLocation] = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<ProductForm>({
@@ -36,20 +37,18 @@ export default function AdminProducts() {
   const deleteMutation = trpc.products.delete.useMutation();
   const utils = trpc.useUtils();
 
-  if (authLoading) {
-    return <div className="flex items-center justify-center min-h-screen"><Loader className="animate-spin" /></div>;
-  }
+  // Check authentication
+  useEffect(() => {
+    const password = sessionStorage.getItem("adminPassword");
+    if (!password) {
+      setLocation("/admin/login");
+    } else {
+      setIsAuthenticated(true);
+    }
+  }, [setLocation]);
 
-  if (!user || user.role !== "admin") {
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-3xl font-bold mb-4">Access Denied</h1>
-          <p className="text-gray-600">You don't have permission to access this page.</p>
-        </div>
-      </div>
-    );
+  if (!isAuthenticated) {
+    return <div className="flex items-center justify-center min-h-screen"><Loader className="animate-spin" /></div>;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -115,9 +114,17 @@ export default function AdminProducts() {
     <div className="min-h-screen bg-white">
       <Header />
 
+
+
       <div className="container mx-auto px-4 py-12">
         <div className="flex items-center justify-between mb-8">
-          <GlitchTitle className="text-4xl font-bold">Product Management</GlitchTitle>
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" onClick={() => setLocation("/admin/dashboard")}>
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Dashboard
+            </Button>
+            <GlitchTitle className="text-4xl font-bold">Product Management</GlitchTitle>
+          </div>
           <Button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2">
             <Plus className="w-4 h-4" />
             {showForm ? "Cancel" : "Add Product"}

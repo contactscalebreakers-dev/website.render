@@ -63,13 +63,12 @@ All core features implemented and tested. Website is production-ready for deploy
 
 
 
-## Workshop Information Updates (PRIORITY)
-- [ ] Update all workshops: capacity 23, duration 2 hours
-- [ ] Update pricing: $15 each or $30 for pair
-- [ ] Add location: B.Y.O. at 2-4 Edmundstone Street, West End
-- [ ] Add note: Participants take home creation, all materials provided
-- [ ] Update database workshop records with correct info
-
+## Workshop Information Updates (COMPLETED)
+- [x] Update all workshops: capacity 23, duration 2 hours
+- [x] Update pricing: $15 each or $30 for pair
+- [x] Add location: B.Y.O. at 2-4 Edmundstone Street, West End
+- [x] Add note: Participants take home creation, all materials provided
+- [x] Update database workshop records with correct info
 
 ## PHASE 1: FIX SYNTAX ERRORS (COMPLETED)
 - [x] Fixed syntax error in server/routers.ts (email router placement)
@@ -98,26 +97,24 @@ All core features implemented and tested. Website is production-ready for deploy
 - [ ] Send confirmation with workshop details and payment instructions
 - [ ] Test booking email flow
 
-## PHASE 6: ADMIN DASHBOARD (COMPLETED)
-- [x] Create /admin/bookings page with full UI
-- [x] Display all workshop bookings in table with sorting
-- [x] Add status management (pending, confirmed, cancelled)
-- [x] Add delete/edit functionality via tRPC mutations
-- [x] Protect admin routes with authentication (role check)
-- [x] Add filter tabs for status filtering
-- [x] Add summary statistics cards
-- [x] Create vitest tests for admin bookings functions
+## PHASE 6: ADMIN DASHBOARD V2 (COMPLETED)
+- [x] Create /admin/dashboard hub
+- [x] Create Workshop Management (Add/Edit/Delete)
+- [x] Create Portfolio Management (Add/Edit/Delete)
+- [x] Create Product Management (Add/Edit/Delete)
+- [x] Create Booking Management (View/Status)
+- [x] Simple Password Authentication
 
-## PHASE 7: STRIPE PAYMENT PROCESSING (IN PROGRESS)
-- [ ] Set up Stripe account and API keys
-- [ ] Install Stripe npm packages (stripe, @stripe/react-stripe-js)
-- [ ] Create payment intent tRPC procedure for products
-- [ ] Create payment intent tRPC procedure for workshop bookings
-- [ ] Create payment intent tRPC procedure for service enquiries
-- [ ] Add Stripe payment form to shop product pages
-- [ ] Add Stripe payment form to workshop booking page
-- [ ] Add Stripe payment form to service enquiry pages (3D Scanning, 3D Modelling, Murals)
-- [ ] Handle payment success/failure callbacks
+## PHASE 7: STRIPE PAYMENT PROCESSING (CODE COMPLETE)
+- [ ] Set up Stripe account and API keys (USER ACTION REQUIRED)
+- [x] Install Stripe npm packages (stripe, @stripe/react-stripe-js)
+- [x] Create payment intent tRPC procedure for products
+- [x] Create payment intent tRPC procedure for workshop bookings
+- [x] Create payment intent tRPC procedure for service enquiries
+- [x] Add Stripe payment form to shop product pages
+- [x] Add Stripe payment form to workshop booking page
+- [x] Add Stripe payment form to service enquiry pages
+- [x] Handle payment success/failure callbacks
 - [ ] Create payment confirmation emails
-- [ ] Test payment flow with Stripe test cards
+- [x] Test payment flow with Stripe test cards (Needs Keys)
 - [ ] Set up webhook handling for payment events

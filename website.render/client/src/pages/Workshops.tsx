@@ -55,8 +55,17 @@ export default function Workshops() {
               ) : workshops && workshops.length > 0 ? (
                 workshops.map((workshop) => (
                   <div key={workshop.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                    <div className="bg-gray-100 h-48 flex items-center justify-center">
-                      <p className="text-gray-500">[Workshop image]</p>
+                    <div className="bg-gray-100 h-48 flex items-center justify-center overflow-hidden">
+                      {workshop.imageUrl ? (
+                        <img
+                          src={workshop.imageUrl}
+                          alt={workshop.title}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <p className="text-gray-500">[Workshop image]</p>
+                      )}
                     </div>
                     <div className="p-6">
                       <h3 className="text-xl font-bold mb-2">{workshop.title}</h3>

@@ -1,44 +1,35 @@
-import { useAuth } from "@/_core/hooks/useAuth";
 import { useLocation } from "wouter";
 import { useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Trash2, CheckCircle, Clock, XCircle } from "lucide-react";
+import { Trash2, CheckCircle, Clock, XCircle, ArrowLeft } from "lucide-react";
 
 export default function AdminBookings() {
-  const { user, loading } = useAuth();
   const [, setLocation] = useLocation();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState<"all" | "pending" | "confirmed" | "cancelled">("all");
 
-  // Redirect if not admin
+  // Check authentication
   useEffect(() => {
-    if (!loading && (!user || user.role !== "admin")) {
-      setLocation("/");
+    const password = sessionStorage.getItem("adminPassword");
+    if (!password) {
+      setLocation("/admin/login");
+    } else {
+      setIsAuthenticated(true);
     }
-  }, [user, loading, setLocation]);
+  }, [setLocation]);
 
   const { data: bookings, isLoading, refetch } = trpc.admin.bookings.list.useQuery();
   const updateStatusMutation = trpc.admin.bookings.updateStatus.useMutation();
   const deleteMutation = trpc.admin.bookings.delete.useMutation();
 
-  if (loading || isLoading) {
+  if (!isAuthenticated || isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading bookings...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user || user.role !== "admin") {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Access Denied</h1>
-          <p className="text-gray-600">You do not have permission to view this page.</p>
         </div>
       </div>
     );
@@ -99,6 +90,10 @@ export default function AdminBookings() {
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
+          <Button variant="ghost" onClick={() => setLocation("/admin/dashboard")} className="mb-4 pl-0 hover:pl-2 transition-all">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Dashboard
+          </Button>
           <h1 className="text-4xl font-black mb-2">Workshop Bookings</h1>
           <p className="text-gray-600">Manage all workshop bookings and registrations</p>
         </div>
