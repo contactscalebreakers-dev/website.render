@@ -120,9 +120,6 @@ export default function Products() {
                               src={product.imageUrl}
                               alt={product.name}
                               className="w-full h-full object-cover hover:scale-105 transition duration-300"
-                              width={400}
-                              height={400}
-                              loading="lazy"
                             />
                             {product.isOneOfOne === "true" && (
                               <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">

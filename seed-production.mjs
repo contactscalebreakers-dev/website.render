@@ -40,7 +40,7 @@ async function seed() {
         id: crypto.randomUUID(),
         title: 'Designer Toy Sculpting Basics',
         description: 'Learn the fundamentals of creating your own designer toy figures. We\'ll cover sculpting techniques, material selection, and finishing touches. Perfect for beginners who want to start their journey into the world of designer toys.',
-        date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+        date: new Date('2024-12-21T14:00:00Z'),
         time: '2:00 PM',
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '85',
@@ -51,7 +51,7 @@ async function seed() {
         id: crypto.randomUUID(),
         title: 'Street Art & Legal Graffiti Techniques',
         description: 'Master the art of legal graffiti and street art techniques. Learn spray can control, stenciling, and creating bold urban-inspired designs. All skill levels welcome!',
-        date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days from now
+        date: new Date('2025-01-04T14:00:00Z'),
         time: '2:00 PM',
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '75',
@@ -62,7 +62,7 @@ async function seed() {
         id: crypto.randomUUID(),
         title: 'Diorama Building Workshop',
         description: 'Create stunning miniature scenes and dioramas. Learn weathering techniques, scene composition, and how to bring your creative vision to life in a small-scale environment.',
-        date: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000), // 21 days from now
+        date: new Date('2025-01-18T14:00:00Z'),
         time: '2:00 PM',
         location: 'B.Y.O. - 2-4 Edmundstone Street, West End, Brisbane',
         price: '90',
