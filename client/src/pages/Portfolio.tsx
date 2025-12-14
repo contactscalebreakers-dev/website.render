@@ -50,7 +50,7 @@ export default function Portfolio() {
                 {murals.map((item) => (
                   <div key={item.id} className="overflow-hidden rounded-lg shadow-lg border border-gray-200">
                     {item.imageUrl && (
-                      <img src={item.imageUrl} alt={item.title} className="w-full h-64 object-cover" width={400} height={256} loading="lazy" />
+                      <img src={item.imageUrl} alt={item.title} className="w-full h-64 object-cover" />
                     )}
                     <div className="p-4 bg-white">
                       <h3 className="font-bold text-lg mb-1">{item.title}</h3>
@@ -101,9 +101,6 @@ export default function Portfolio() {
                           src={item.imageUrl}
                           alt={item.title}
                           className="w-full h-full object-cover"
-                          width={400}
-                          height={400}
-                          loading="lazy"
                         />
                       </div>
                     )}
@@ -161,9 +158,6 @@ export default function Portfolio() {
                           src={item.imageUrl}
                           alt={item.title}
                           className="w-full h-full object-cover"
-                          width={400}
-                          height={400}
-                          loading="lazy"
                         />
                       </div>
                     )}
