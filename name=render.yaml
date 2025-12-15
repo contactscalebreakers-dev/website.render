@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: scalebreakers-web
+    env: node
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "npm ci && npm run build"
+    startCommand: "npm run start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+        sync: false
+    pullRequestPreviews: true

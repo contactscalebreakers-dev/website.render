@@ -61,10 +61,9 @@
     "input-otp": "^1.4.2",
     "jose": "6.1.0",
     "lucide-react": "^0.453.0",
-    
     "nanoid": "^5.1.5",
     "next-themes": "^0.4.6",
-    "nodemailer": "^7.0.10",
+    "nodemailer": "^7.0.11",
     "postgres": "^3.4.7",
     "react": "^19.1.1",
     "react-day-picker": "^9.11.1",
@@ -80,9 +79,10 @@
     "vaul": "^1.1.2",
     "wouter": "^3.3.5",
     "zod": "^4.1.12",
-    "vite": "^7.1.7",
+    "vite": "^7.1.11",
     "esbuild": "^0.25.0",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "express-rate-limit": "^8.2.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
@@ -116,4 +116,4 @@
     }
   }
 }
-
+    

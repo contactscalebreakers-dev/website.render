@@ -1,5 +1,21 @@
 import nodemailer from "nodemailer";
 
+/**
+ * Escapes HTML special characters to prevent XSS attacks
+ */
+function escapeHtml(text: string | number): string {
+  const str = String(text);
+  const htmlEscapeMap: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;',
+  };
+  return str.replace(/[&<>"'/]/g, (char) => htmlEscapeMap[char]);
+}
+
 // Create transporter using Outlook SMTP
 const transporter = nodemailer.createTransport({
   host: "smtp-mail.outlook.com",
@@ -49,10 +65,10 @@ export function getContactFormEmailTemplate(
 ): string {
   return `
     <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Message:</strong></p>
-    <p>${message.replace(/\n/g, "<br>")}</p>
+    <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
   `;
 }
 
@@ -65,12 +81,12 @@ export function getServiceEnquiryEmailTemplate(
 ): string {
   return `
     <h2>New Service Enquiry</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phone}</p>
-    <p><strong>Service:</strong> ${service}</p>
+    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
+    <p><strong>Service:</strong> ${escapeHtml(service)}</p>
     <p><strong>Details:</strong></p>
-    <p>${details.replace(/\n/g, "<br>")}</p>
+    <p>${escapeHtml(details).replace(/\n/g, "<br>")}</p>
   `;
 }
 
@@ -83,14 +99,14 @@ export function getBookingConfirmationEmailTemplate(
 ): string {
   return `
     <h2>Workshop Booking Confirmation</h2>
-    <p>Hi ${name},</p>
+    <p>Hi ${escapeHtml(name)},</p>
     <p>Thank you for booking with Scale Breakers!</p>
     <h3>Booking Details</h3>
     <ul>
-      <li><strong>Workshop:</strong> ${workshop}</li>
-      <li><strong>Date:</strong> ${date}</li>
-      <li><strong>Tickets:</strong> ${quantity}</li>
-      <li><strong>Total Price:</strong> $${price.toFixed(2)}</li>
+      <li><strong>Workshop:</strong> ${escapeHtml(workshop)}</li>
+      <li><strong>Date:</strong> ${escapeHtml(date)}</li>
+      <li><strong>Tickets:</strong> ${escapeHtml(quantity)}</li>
+      <li><strong>Total Price:</strong> $${escapeHtml(price.toFixed(2))}</li>
       <li><strong>Location:</strong> B.Y.O. at 2-4 Edmundstone Street, West End</li>
     </ul>
     <h3>What to Know</h3>
