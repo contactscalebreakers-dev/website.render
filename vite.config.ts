@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "path";
 import { defineConfig, loadEnv, Plugin } from "vite";
-import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+// import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 // Uncomment for SEO prerendering:
 // import prerender from "vite-plugin-prerender";
 
@@ -55,7 +55,7 @@ function buildSafeguard(): Plugin {
 const plugins = [
   react(),
   tailwindcss(),
-  vitePluginManusRuntime(),
+  // vitePluginManusRuntime(),
   htmlEnvReplace(),
   buildSafeguard(),
   // Uncomment for SEO prerendering (generates static HTML for routes):

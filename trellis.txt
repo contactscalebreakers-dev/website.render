@@ -1,0 +1,192 @@
+TRELLIS 3D - IMAGE TO 3D AUTOMATION SETUP GUIDE
+================================================
+
+🎉 AMAZING NEWS! TRELLIS IS FREE/CHEAP vs MESHY!
+================================================
+
+✓ FREE CREDITS on signup (no credit card required!)
+✓ Apache 2.0 License = Commercial use allowed!
+✓ State-of-the-art Microsoft Research model
+✓ 10-30 seconds generation time (vs 5-10 min with Meshy)
+✓ NO 3-day deletion! (PiAPI stores your files)
+✓ Multiple formats: GLB, MP4 preview, PNG no-background
+
+
+QUICK START (4 STEPS):
+======================
+
+STEP 1: Get Your FREE API Key
+------------------------------
+1. Go to: https://piapi.ai/workspace
+2. Click "Sign Up" (top right)
+3. Create account (email + password)
+4. You get FREE credits automatically!
+5. Go to "API Keys" section
+6. Click "Create API Key"
+7. Copy your API key (starts with "pi_...")
+
+
+STEP 2: Install Python & Libraries
+-----------------------------------
+1. Download Python from: https://www.python.org/downloads/
+2. Run installer - CHECK "Add Python to PATH"
+3. Open Command Prompt (Windows Key + R, type cmd)
+4. Install requests library:
+   
+   pip install requests
+
+
+STEP 3: Configure the Script
+-----------------------------
+1. Open: trellis_image_to_3d_automation.py in Notepad
+2. Find line 14:
+   API_KEY = "0d858bc70adb1519e4900e92bb725a99fa4e0fcace1e2578b5eba05b30e0fff2"
+3. Replace with your key:
+   API_KEY = "0d858bc70adb1519e4900e92bb725a99fa4e0fcace1e2578b5eba05b30e0fff2"
+4. Save the file
+
+
+STEP 4: Run It!
+---------------
+1. Put your images in:
+   C:\Users\danka\Documents\trellis_3d_workflow\input_images
+
+2. Double-click: trellis_image_to_3d_automation.py
+
+3. Press Enter to start
+
+4. Your 3D models appear in:
+   C:\Users\danka\Documents\trellis_3d_workflow
+
+
+WHAT YOU'LL GET:
+================
+For each image:
+- [name]_model.glb - 3D model (ready for Blender, Unity, etc)
+- [name]_preview.mp4 - 360° rotating preview video
+- [name]_no_background.png - Image with background removed
+
+
+COST COMPARISON: TRELLIS vs MESHY
+==================================
+Meshy:
+- Image to 3D: ~30 credits per image
+- $20/month = 1,000 credits = ~33 images
+- Cost per image: $0.60
+
+Trellis via PiAPI:
+- Sign up FREE credits! (test it out)
+- Pay-as-you-go pricing (much cheaper)
+- No monthly subscription required
+- Check exact pricing at: https://piapi.ai/pricing
+
+
+FEATURES COMPARISON:
+===================
+
+| Feature | Meshy | Trellis |
+|---------|-------|---------|
+| Free Credits | NO | ✓ YES |
+| Cost per image | $0.60 | Much cheaper! |
+| Speed | 5-10 min | 10-30 sec |
+| File deletion | 3 days! | No deletion |
+| Open source | NO | ✓ YES |
+| Commercial use | Paid only | ✓ FREE |
+| Rigging | ✓ Yes | No |
+| Quality | Excellent | Excellent |
+
+
+TIPS FOR BEST RESULTS:
+======================
+✓ Use clear, well-lit images
+✓ Plain backgrounds work best
+✓ Front-facing images give best results
+✓ Higher resolution = better quality
+✓ PNG or JPG format
+
+✗ Avoid: Dark/blurry images
+✗ Avoid: Cluttered backgrounds
+✗ Avoid: Extreme angles
+
+
+TROUBLESHOOTING:
+================
+
+"Please set your PiAPI API key!"
+→ Follow STEP 3 above to add your key
+
+"No images found"
+→ Put .jpg or .png files in: input_images folder
+
+"HTTP Error 401"
+→ Your API key is invalid. Get a new one from piapi.ai
+
+"HTTP Error 429"
+→ Rate limit hit. Wait a minute and try again
+
+"Task failed"
+→ Check your internet connection
+→ Check image is valid (try opening it first)
+→ Try a different image
+
+
+ADVANCED OPTIONS:
+=================
+
+Want higher quality? Edit the script (line 88-99):
+- ss_sampling_steps: 50 → 100 (slower but better)
+- slat_sampling_steps: 50 → 100 (slower but better)
+- texture_size: 1024 → 2048 (higher resolution)
+- mesh_simplify: 0.9 → 0.95 (more polygons)
+
+Want faster generation? Lower the numbers:
+- ss_sampling_steps: 50 → 25
+- slat_sampling_steps: 50 → 25
+
+
+USING YOUR 3D MODELS:
+=====================
+
+In Blender:
+1. File → Import → glTF 2.0 (.glb)
+2. Select your _model.glb file
+3. Done!
+
+In Unity:
+1. Drag .glb file into Assets folder
+2. Done!
+
+In Unreal Engine:
+1. Import as FBX or convert GLB first
+2. Use glTF importer plugin
+
+Online 3D Viewers:
+- https://3dviewer.net/
+- https://gltf-viewer.donmccurdy.com/
+
+
+NEED RIGGING?
+=============
+Trellis doesn't have auto-rigging built-in.
+
+Options:
+1. Use Mixamo (free): https://www.mixamo.com/
+   - Upload your GLB
+   - Auto-rig for free
+   - Download with animations
+
+2. Use Blender with Rigify addon (free)
+
+3. Stick with Meshy if you need auto-rigging
+
+
+GETTING MORE HELP:
+==================
+- PiAPI Docs: https://piapi.ai/docs
+- PiAPI Discord: https://discord.gg/piapi
+- Trellis GitHub: https://github.com/microsoft/TRELLIS
+- Check logs: trellis_workflow_log.txt
+
+
+ENJOY YOUR FREE 3D MODELS! 🎨✨
+================================
