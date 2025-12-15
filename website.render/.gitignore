@@ -14,6 +14,10 @@ build/
 .env.test.local
 .env.production.local
 
+# Local environment files
+env_output.txt
+render_clean.env
+
 # IDE and editor files
 .vscode/
 .idea/
