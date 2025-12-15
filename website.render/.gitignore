@@ -13,11 +13,11 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
-
+ production-fix-v1
 # Local environment files
 env_output.txt
 render_clean.env
-
+ main
 # IDE and editor files
 .vscode/
 .idea/
