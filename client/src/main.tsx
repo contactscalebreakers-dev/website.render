@@ -1,3 +1,4 @@
+import { inject } from "@vercel/analytics";
 import { trpc } from "@/lib/trpc";
 import { UNAUTHED_ERR_MSG } from '@shared/const';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -7,6 +8,9 @@ import superjson from "superjson";
 import App from "./App";
 import { getLoginUrl } from "./const";
 import "./index.css";
+
+// Initialize Vercel Web Analytics
+inject();
 
 const queryClient = new QueryClient();
 
