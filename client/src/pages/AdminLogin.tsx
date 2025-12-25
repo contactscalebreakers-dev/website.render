@@ -2,23 +2,37 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import GlitchTitle from "@/components/GlitchTitle";
+import { supabase } from "@/lib/supabase";
 
 export default function AdminLogin() {
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [, setLocation] = useLocation();
+  const [error, setError] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Store password in sessionStorage (simple approach)
-    if (password) {
-      sessionStorage.setItem("adminPassword", password);
-      setLocation("/admin/dashboard");
-    } else {
-      setError("Please enter a password");
+  const provider = (import.meta.env.VITE_ADMIN_OAUTH_PROVIDER as string | undefined) || "google";
+
+  async function signIn() {
+    setError("");
+
+    const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+    const anon = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+    if (!url || !anon) {
+      setError("Supabase env vars are missing. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY on Render.");
+      return;
     }
-  };
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: provider as any,
+      options: {
+        redirectTo: `${window.location.origin}/admin/dashboard`,
+      },
+    });
+
+    if (error) setError(error.message);
+  }
+
+  async function goHome() {
+    setLocation("/");
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4">
@@ -26,32 +40,22 @@ export default function AdminLogin() {
         <GlitchTitle as="h1" className="text-3xl font-bold mb-6 text-center">
           Admin Login
         </GlitchTitle>
-        
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-semibold mb-2">Admin Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setError("");
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter admin password"
-              autoFocus
-            />
-            {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
-          </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
-            Login
+        <div className="space-y-4">
+          {error ? <p className="text-red-600 text-sm">{error}</p> : null}
+
+          <Button onClick={signIn} className="w-full">
+            Sign in with {provider}
           </Button>
-        </form>
 
-        <p className="text-center text-sm text-gray-600 mt-6">
-          Set ADMIN_PASSWORD in your .env file
-        </p>
+          <Button variant="outline" onClick={goHome} className="w-full">
+            Back to site
+          </Button>
+
+          <p className="text-xs text-muted-foreground text-center pt-2">
+            If you can log in but still get redirected back here, check your Supabase Redirect URLs.
+          </p>
+        </div>
       </div>
     </div>
   );

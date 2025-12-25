@@ -19,8 +19,9 @@ interface WorkshopForm {
 
 export default function AdminWorkshops() {
   const [, setLocation] = useLocation();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  if (loading) return null;
+  const { loading } = useAdminGuard();
+const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   
   const [formData, setFormData] = useState<WorkshopForm>({
@@ -38,15 +39,6 @@ export default function AdminWorkshops() {
   const createMutation = trpc.workshops.create.useMutation();
   const updateMutation = trpc.workshops.update.useMutation();
   const deleteMutation = trpc.workshops.delete.useMutation();
-
-  useEffect(() => {
-    const password = sessionStorage.getItem("adminPassword");
-    if (!password) {
-      setLocation("/admin/login");
-    } else {
-      setIsAuthenticated(true);
-    }
-  }, [setLocation]);
 
   if (!isAuthenticated) return null;
 

@@ -2,42 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1"
-    />
-    
-    <!-- Primary Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
     <title>%VITE_APP_TITLE%</title>
-    <meta name="title" content="Scale Breakers — Designer Toys & Murals">
-    <meta name="description" content="Scale Breakers — 3D designer toys, legal graffiti murals, and urban-inspired creative design.">
-    
-    <!-- Favicon -->
+    <meta name="title" content="%VITE_APP_TITLE%" />
+    <meta name="description" content="Scale Breakers — designer toys, legal graffiti murals, and urban-inspired creative design." />
+
     <link rel="icon" type="image/png" href="%VITE_APP_LOGO%" />
     <link rel="apple-touch-icon" href="%VITE_APP_LOGO%" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://scale-breakers-website.onrender.com/">
-    <meta property="og:title" content="Scale Breakers — Designer Toys & Murals">
-    <meta property="og:description" content="3D model toys, mural commissions, and brand design with a raw urban edge.">
-    <meta property="og:image" content="https://scale-breakers-website.onrender.com/social-preview.jpg">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://scale-breakers-website.onrender.com/">
-    <meta name="twitter:title" content="Scale Breakers — Designer Toys & Murals">
-    <meta name="twitter:description" content="3D model toys, mural commissions, and brand design with a raw urban edge.">
-    <meta name="twitter:image" content="https://scale-breakers-website.onrender.com/social-preview.jpg">
-  </head>
 
+    <!-- Optional analytics (Umami or similar). Injected only if env vars are set. -->
+    <script>
+      (function () {
+        var src = "%VITE_ANALYTICS_ENDPOINT%";
+        var id = "%VITE_ANALYTICS_WEBSITE_ID%";
+        if (!src || src === "%VITE_ANALYTICS_ENDPOINT%") return;
+        if (!id || id === "%VITE_ANALYTICS_WEBSITE_ID%") return;
+        var s = document.createElement("script");
+        s.defer = true;
+        s.src = src;
+        s.setAttribute("data-website-id", id);
+        document.head.appendChild(s);
+      })();
+    </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"
-    ></script>
   </body>
 </html>

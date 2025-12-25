@@ -1,31 +1,37 @@
+# Exported from Render on 2025-12-15T07:09:16Z
+version: "1"
 services:
-  - type: web
-    name: scalebreakers
-    env: node
-    region: singapore
-    plan: free
-    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm run build
-    startCommand: pnpm run start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: VITE_APP_TITLE
-        value: Scale Breakers
-      - key: VITE_APP_LOGO
-        value: /logo-main.webp
-      - key: VITE_ANALYTICS_ENDPOINT
-        value: ""
-      - key: VITE_ANALYTICS_WEBSITE_ID
-        value: ""
-      - key: VITE_STRIPE_PUBLISHABLE_KEY
-        value: pk_test_51SaQfR8eqGsKhnNxsn3n6iZJEXWi5F7p5EqVkSFizhJebvbrJWBVa5wuG5BN4HyBCLn0WMqu87WJA9pxA9wABRdB00xyedCq1I
-      - key: DATABASE_URL
-        sync: false
-      - key: SUPABASE_URL
-        sync: false
-      - key: SUPABASE_ANON_KEY
-        sync: false
-      - key: STRIPE_SECRET_KEY
-        sync: false
-      - key: ADMIN_PASSWORD
-        sync: false
+- type: web
+  name: website.render.new
+  runtime: node
+  repo: https://github.com/contactscalebreakers-dev/website.render
+  plan: starter
+  envVars:
+  - key: VITE_APP_TITLE
+    sync: false
+  - key: NODE_ENV
+    sync: false
+  - key: ADMIN_PASSWORD
+    sync: false
+  - key: STRIPE_SECRET_KEY
+    sync: false
+  - key: DATABASE_URL
+    sync: false
+  - key: VITE_SUPABASE_URL
+    sync: false
+  - key: VITE_SUPABASE_ANON_KEY
+    sync: false
+  - key: SUPABASE_URL
+    sync: false
+  - key: SUPABASE_SERVICE_ROLE_KEY
+    sync: false
+  - key: VITE_ADMIN_EMAIL_ALLOWLIST
+    sync: false
+  - key: ADMIN_EMAIL_ALLOWLIST
+    sync: false
+  - key: VITE_ADMIN_OAUTH_PROVIDER
+    sync: false
+  region: singapore
+  buildCommand: npm install -g pnpm && pnpm install && pnpm run build
+  startCommand: pnpm run start
+  autoDeployTrigger: commit

@@ -88,3 +88,19 @@ When ready to go live (e.g. on Render or Vercel):
 1.  Add all the Environment Variables from your `.env` to the hosting provider's "Environment Variables" section.
 2.  Run the build command: `npm run build`.
 3.  Start command: `npm run start`.
+
+
+## Supabase Admin OAuth (Render)
+
+Set these environment variables on Render:
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_ANON_KEY
+- SUPABASE_URL
+- SUPABASE_SERVICE_ROLE_KEY
+- VITE_ADMIN_EMAIL_ALLOWLIST (comma-separated emails allowed to access admin)
+- ADMIN_EMAIL_ALLOWLIST (same list for server-side checks)
+- VITE_ADMIN_OAUTH_PROVIDER (default: google)
+
+In Supabase Auth settings, add Redirect URLs:
+- https://YOUR-RENDER-DOMAIN/admin/dashboard
+- http://localhost:5173/admin/dashboard

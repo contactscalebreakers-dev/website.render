@@ -1,25 +1,18 @@
 import { useLocation } from "wouter";
 import { useEffect, useState } from "react";
+import { useAdminGuard } from "@/hooks/useAdminGuard";
 import Header from "@/components/Header";
 import GlitchTitle from "@/components/GlitchTitle";
 import { ShoppingBag, Calendar, Palette, ClipboardList, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase";
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const password = sessionStorage.getItem("adminPassword");
-    if (!password) {
-      setLocation("/admin/login");
-    } else {
-      setIsAuthenticated(true);
-    }
-  }, [setLocation]);
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("adminPassword");
+  if (loading) return null;
+  const { loading } = useAdminGuard();
+const handleLogout = async () => {
+    await supabase.auth.signOut();
     setLocation("/admin/login");
   };
 

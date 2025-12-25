@@ -7,19 +7,11 @@ import { Trash2, CheckCircle, Clock, XCircle, ArrowLeft } from "lucide-react";
 
 export default function AdminBookings() {
   const [, setLocation] = useLocation();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState<"all" | "pending" | "confirmed" | "cancelled">("all");
+  if (loading) return null;
+  const { loading } = useAdminGuard();
+const [selectedStatus, setSelectedStatus] = useState<"all" | "pending" | "confirmed" | "cancelled">("all");
 
   // Check authentication
-  useEffect(() => {
-    const password = sessionStorage.getItem("adminPassword");
-    if (!password) {
-      setLocation("/admin/login");
-    } else {
-      setIsAuthenticated(true);
-    }
-  }, [setLocation]);
-
   const { data: bookings, isLoading, refetch } = trpc.admin.bookings.list.useQuery();
   const updateStatusMutation = trpc.admin.bookings.updateStatus.useMutation();
   const deleteMutation = trpc.admin.bookings.delete.useMutation();

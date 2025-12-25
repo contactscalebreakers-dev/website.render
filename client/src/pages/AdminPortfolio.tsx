@@ -15,8 +15,9 @@ interface PortfolioForm {
 
 export default function AdminPortfolio() {
   const [, setLocation] = useLocation();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  if (loading) return null;
+  const { loading } = useAdminGuard();
+const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   
   const [formData, setFormData] = useState<PortfolioForm>({
@@ -30,15 +31,6 @@ export default function AdminPortfolio() {
   const createMutation = trpc.portfolio.create.useMutation();
   const updateMutation = trpc.portfolio.update.useMutation();
   const deleteMutation = trpc.portfolio.delete.useMutation();
-
-  useEffect(() => {
-    const password = sessionStorage.getItem("adminPassword");
-    if (!password) {
-      setLocation("/admin/login");
-    } else {
-      setIsAuthenticated(true);
-    }
-  }, [setLocation]);
 
   if (!isAuthenticated) return null;
 
