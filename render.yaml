@@ -9,6 +9,16 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: VITE_APP_TITLE
+        value: Scale Breakers
+      - key: VITE_APP_LOGO
+        value: /logo-main.webp
+      - key: VITE_ANALYTICS_ENDPOINT
+        value: ""
+      - key: VITE_ANALYTICS_WEBSITE_ID
+        value: ""
+      - key: VITE_STRIPE_PUBLISHABLE_KEY
+        value: pk_test_51SaQfR8eqGsKhnNxsn3n6iZJEXWi5F7p5EqVkSFizhJebvbrJWBVa5wuG5BN4HyBCLn0WMqu87WJA9pxA9wABRdB00xyedCq1I
       - key: DATABASE_URL
         sync: false
       - key: SUPABASE_URL
@@ -16,4 +26,6 @@ services:
       - key: SUPABASE_ANON_KEY
         sync: false
       - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
         sync: false
