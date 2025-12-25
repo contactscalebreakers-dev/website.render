@@ -32,6 +32,6 @@ services:
   - key: VITE_ADMIN_OAUTH_PROVIDER
     sync: false
   region: singapore
-  buildCommand: npm install -g pnpm && pnpm install && pnpm run build
+  buildCommand: npm install -g pnpm && pnpm install --no-frozen-lockfile && pnpm run build
   startCommand: pnpm run start
   autoDeployTrigger: commit
