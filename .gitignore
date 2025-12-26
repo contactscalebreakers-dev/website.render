@@ -110,3 +110,9 @@ temp/
 *.sqlite
 *.sqlite3
 .env
+
+# Catch duplicate env files like ".env (2)" etc
+*.env
+*.env.*
+!.env.example
+!.env.production.example
